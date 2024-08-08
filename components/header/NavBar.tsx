@@ -1,8 +1,13 @@
 import React from 'react'
+import Logo from '../rootComp/Logo'
+import AuthButtons from './AuthButtons'
 
 const NavBar = () => {
   return (
-    <div>NavBar</div>
+    <nav className='flex items-center justify-between   max-sm:flex-col mx-8 h-20 '>
+      <Logo  />
+      <AuthButtons />
+    </nav>
   )
 }
 
