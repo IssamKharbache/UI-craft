@@ -2,6 +2,7 @@
 import Button from "@/components/buttons/Button";
 import LoadingButton from "@/components/rootComp/LoadingButton";
 import { validateEmail } from "@/utils/validateEmail";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
@@ -18,7 +19,6 @@ const RegisterPage = () => {
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e: any) => {
-    
     e.preventDefault();
      //validation email
      if (!validateEmail(email)) {
@@ -49,7 +49,7 @@ const RegisterPage = () => {
       if (res.status === 200) {
         setError("");
         setLoading(false);
-        router.push("/login");
+        router.push("/sign-in");
       }
     } catch (error) {
       setError("Error, please try again");
@@ -88,10 +88,12 @@ const RegisterPage = () => {
         />
         <input
           onChange={(e) => setPassword(e.target.value)}
-          type="text"
+          type="password"
           placeholder="Password"
           className="py-4 px-3 outline-none border-2 focus:border-red-200 rounded-sm "
         />
+         <div className="text-center text-slate-500">- or -</div>
+         <p className="text-center text-slate-600 text-sm">Already have an account ? <Link className="text-blue-500 underline" href="/sign-in">Login</Link></p>
         {
           loading ?  <LoadingButton />:<Button type="submit" label="Sign up" />
         }
