@@ -4,7 +4,7 @@ import AuthButtons from './AuthButtons'
 
 const NavBar = () => {
   return (
-    <nav className='flex items-center justify-between   max-sm:flex-col mx-8 h-20 '>
+    <nav className='flex items-center justify-between shadow-md    max-sm:flex-col mx-8 h-20 '>
       <Logo  />
       <AuthButtons />
     </nav>
