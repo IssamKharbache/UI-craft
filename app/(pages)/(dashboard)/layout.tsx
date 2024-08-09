@@ -1,9 +1,9 @@
-import type { Metadata } from "next";
-import { Rubik } from "next/font/google";
-import "./globals.css";
-
-import { getServerSession } from "next-auth";
+import { AppProvider } from "@/app/ContextApi";
+import SideBar from "@/components/dashboard/SideBar";
 import AuthProvider from "@/utils/SessionProvider";
+import { getServerSession } from "next-auth";
+import { Rubik } from "next/font/google";
+import React from "react";
 
 const rubik = Rubik({
   subsets: ["latin"],
@@ -11,23 +11,23 @@ const rubik = Rubik({
   weight: ["300", "400", "500", "600", "700", "800", "900"],
 });
 
-export const metadata: Metadata = {
-  title: "UIcraft",
-  description:
-    "Library of free and customizable UI elements where you can also build your own components",
-};
-
 export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   const session = await getServerSession();
+
   return (
     <html lang="en">
       <body className={rubik.className}>
         <AuthProvider session={session}>
-          <div className="">{children}</div>
+          <AppProvider>
+             <div className="flex">
+            <SideBar />
+            <div className="mt-16 ml-4">{children}</div>
+          </div>
+          </AppProvider>
         </AuthProvider>
       </body>
     </html>
