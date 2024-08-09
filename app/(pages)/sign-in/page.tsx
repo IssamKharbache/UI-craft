@@ -7,6 +7,8 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 import { useEffect, useState } from "react";
+import { BsGithub } from "react-icons/bs";
+import { FcGoogle } from "react-icons/fc";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -20,13 +22,12 @@ const LoginPage = () => {
   const [loading, setLoading] = useState(false);
 
   const session = useSession();
-
-
-  useEffect(()=>{
-    if(session?.status === "authenticated"){
-      router.push("/")
+  
+  useEffect(() => {
+    if (session?.status === "authenticated") {
+      router.push("/");
     }
-  },[session,router])
+  }, [session, router]);
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     //validation email
@@ -40,16 +41,16 @@ const LoginPage = () => {
       email,
       password,
     });
+     if (res?.url)router.replace("/");
     if (res?.error) {
       setLoading(false);
       setError("Email or password incorrect");
-     
       
     }
-    if (res?.url)router.push("/") 
     else {
       setLoading(false);
       setError("");
+      
     }
   };
   return (
@@ -80,9 +81,36 @@ const LoginPage = () => {
           placeholder="Password"
           className="py-4 px-3 outline-none border-2 focus:border-red-200 rounded-sm "
         />
-        <div className="text-center text-slate-500">- or -</div>
-        <p className="text-center text-slate-600 text-sm">Don't have an account ? <Link className="text-blue-500 underline" href="/sign-up">Register</Link></p>
         {loading ? <LoadingButton /> : <Button type="submit" label="Sign in" />}
+        <div className="text-center text-slate-500">- or -</div>
+        <button
+          type="button"
+          className="flex items-center bg-white hover:bg-gray-200 transition rounded gap-3 justify-center mx-auto mt-4 w-full py-3"
+          onClick={() => {
+            signIn("google");
+          }}
+        >
+           <FcGoogle size={30} />
+          <span className="text-xl text-slate-500 font-bold">Google</span>
+         
+        </button>
+        <button
+          type="button"
+          className="flex items-center bg-gray-800 hover:bg-gray-900 text-slate-200 transition rounded gap-3 justify-center mx-auto mt-4 w-full py-3"
+          onClick={() => {
+            signIn("github");
+          }}
+        >
+          
+          <BsGithub size={30} />
+          <span className="text-xl text-slate-300 font-bold">GitHub</span>
+        </button>
+        <p className="text-center text-slate-600 text-sm">
+          Don't have an account ?{" "}
+          <Link className="text-blue-500 underline" href="/sign-up">
+            Register
+          </Link>
+        </p>
       </form>
     </div>
   );

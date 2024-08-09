@@ -4,7 +4,7 @@ import LoadingButton from "@/components/rootComp/LoadingButton";
 import { validateEmail } from "@/utils/validateEmail";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import{ useState } from "react";
 
 const RegisterPage = () => {
   //state to track inputs
@@ -17,6 +17,7 @@ const RegisterPage = () => {
   //
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
