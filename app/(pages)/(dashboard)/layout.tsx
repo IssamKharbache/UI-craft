@@ -1,4 +1,5 @@
 import { AppProvider } from "@/app/ContextApi";
+import NavBar from "@/components/dashboard/NavBar";
 import SideBar from "@/components/dashboard/SideBar";
 import AuthProvider from "@/utils/SessionProvider";
 import { getServerSession } from "next-auth";
@@ -25,7 +26,10 @@ export default async function RootLayout({
           <AppProvider>
              <div className="flex">
             <SideBar />
-            <div className="mt-16 ml-4">{children}</div>
+          <div className="flex flex-col flex-1">
+          <NavBar />
+          <div className="mt-16 ml-4">{children}</div>
+          </div>
           </div>
           </AppProvider>
         </AuthProvider>

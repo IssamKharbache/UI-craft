@@ -72,25 +72,25 @@ export const authOptions: any = {
         }
       }
     },
-    // async session({ session, token }) {
+    async session({ session, token }:any) {
+      //setting up session data from database
+      session.user.id = token.id;
+      session.user.name = token.provider === "credentials" ? token.fullName : token.name;
+      session.user.email = token.email; 
       
-    //   //setting up session data from database
-    //   session.user.id = token.id;
-    //   session.user.name = token.name;
-    //   session.user.email = token.email;
-    //   session.user.plan = plan;
-    //   return session;
-    // },
-    // async jwt({ token, user, account }) {
-    //   if (user) {
-    //     token.id = user.id;
-    //     token.fullName = user.fullName;
-    //     token.email = user.email;
-    //     token.plan = user.plan;
-    //     token.provider = account.provider;
-    //   }
-    //   return token;
-    // },
+      return session;
+    },
+    async jwt({ token, user,account }:any) {
+      
+      
+      if (user) {
+        token.id = user.id;
+        token.fullName = user.fullName;
+        token.email = user.email;
+        token.provider =account.provider;
+      }
+      return token;
+    },
   },
 };
 
