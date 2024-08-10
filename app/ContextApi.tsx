@@ -30,6 +30,10 @@ interface AppContextType {
     isOpen: boolean;
     setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
   };
+  showSeachBarObject:{
+    showSearchBar:boolean;
+    setShowSeachBar:React.Dispatch<React.SetStateAction<boolean>>;
+  }
 }
 
 const defaultState: AppContextType = {
@@ -41,6 +45,10 @@ const defaultState: AppContextType = {
     isOpen: true,
     setIsOpen: () => {},
   },
+  showSeachBarObject:{
+    showSearchBar:false,
+    setShowSeachBar:()=>{}
+  }
 };
 const AppContext = createContext<AppContextType>(defaultState);
 //create default state
@@ -78,6 +86,8 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({
     const storedValue = localStorage.getItem("openedSideBar");
     return storedValue !== null ? JSON.parse(storedValue) : true;
   });
+  //
+  const [showSearchBar,setShowSeachBar] = useState(false);
 
   //update local storage when ever sidebar states changes
 
@@ -91,6 +101,7 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({
       value={{
         menuItemsObject: { menuItems, setMenuItems },
         sideBarOpen: { isOpen, setIsOpen },
+        showSeachBarObject:{showSearchBar,setShowSeachBar}
       }}
     >
       {children}
