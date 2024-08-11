@@ -20,6 +20,12 @@ const config: Config = {
         }
       }
     },
+    screens:{
+      "sm":"640px",
+      "md":"820px",
+      "lg":"1300px",
+      "xl":"1500px"
+    }
   },
   plugins: [],
 };

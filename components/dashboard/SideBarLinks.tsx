@@ -5,6 +5,9 @@ import { HiMiniHome } from "react-icons/hi2";
 import { TbCategory2 } from "react-icons/tb";
 import { IoIosHeart } from "react-icons/io";
 import { useAppContext } from '@/app/ContextApi';
+import { useWidth } from '@/utils/getDemensions';
+
+
 
 
 
@@ -27,8 +30,14 @@ const links = [
     },
 ]
 const SideBarLinks = ({isResp}:{isResp:boolean}) => {
+  const width = useWidth();
+  
     const path = usePathname();
     const {menuItemsObject:{menuItems},sideBarOpen:{isOpen,setIsOpen},showResponsiveSideBarObject:{setShowResSeachBar}} = useAppContext();
+
+    if(width <=1295){
+      setIsOpen(true);
+    }
   
   return (
     <div className='flex flex-col gap-6'>

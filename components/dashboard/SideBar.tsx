@@ -9,20 +9,21 @@ import { FaArrowRight } from "react-icons/fa6";
 import { useAppContext } from "@/app/ContextApi";
 
 
-
 const SideBar = () => {
   const {
     sideBarOpen: { isOpen, setIsOpen },
   } = useAppContext();
 
+ 
+  
+
   return (
     <div
       className={` ${
-        isOpen ? "ml-0" : "-ml-[12%]"
+        isOpen ? "ml-0" : "md:-ml-[21%] lg:-ml-[17%] xl:-ml-[12%] "
       } h-screen w-[320px]  p-6 pt-12 relative bg-red-100/80 lg:flex flex-col items-center justify-between duration-700 hidden `}
     >
       <div className="flex justify-between gap-4 ">
-        <Logo />
         {isOpen ? (
           <button
             onClick={() => setIsOpen(false)}
@@ -46,3 +47,5 @@ const SideBar = () => {
 };
 
 export default SideBar;
+
+
