@@ -13,12 +13,12 @@ const DropDown = ({ showDropDown }: { showDropDown: boolean }) => {
   const email = session?.user?.email;
   return (
     <div
-      className={` bg-slate-200/80  right-[60px] rounded shadow-xl w-96    ${
+      className={` bg-slate-200  right-[25px] md:right-[40px] rounded shadow-xl w-72 md:w-96    ${
         showDropDown ? "absolute" : "hidden "
       }`}
     >
       {/* links */}
-      <div className="flex flex-col text-slate-500 gap-8  justify-center ml-8 mb-5 mt-8    w-full ">
+      <div className="flex flex-col text-slate-500 text-sm gap-8  justify-center ml-8 mb-5 mt-8    w-full ">
         <div className="flex gap-4 items-center">
         <div className="">
         {image ? (
@@ -36,19 +36,19 @@ const DropDown = ({ showDropDown }: { showDropDown: boolean }) => {
           )}
         </div>
           <div className="flex flex-col">
-            <h1 className="font-semibold text-slate-700">{name}</h1>
+            <h1 className="font-semibold text-slate-700 capitalize">{name}</h1>
             <p className="text-sm">{email}</p>
           </div>
         </div>
         <Link
-          className="flex  items-center gap-4  text-lg hover:text-slate-700 transition-all "
+          className="flex  items-center gap-4  text-sm  hover:text-slate-700 transition-all "
           href="/settings"
         >
           <IoMdSettings />
           <span>Manage account</span>
         </Link>
         <button
-          className="flex  items-center gap-4  text-lg hover:text-slate-700 transition-all "
+          className="flex  items-center gap-4  text-sm hover:text-slate-700 transition-all "
           onClick={()=>signOut()}
         >
           <BiLogOut />
