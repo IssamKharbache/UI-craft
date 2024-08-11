@@ -55,7 +55,8 @@ const LoginPage = () => {
   };
   return (
     <div className="bg-red-100 max-w-md mx-auto mt-[120px] rounded">
-      <h1 className="text-2xl font-bold text-center m-8 pt-10">Login</h1>
+      <h1 className="text-2xl font-bold text-center  pt-10">Login</h1>
+      <Link href="/" className="flex items-center justify-center hover:text-gray-600 transition-all text-sm text-center underline mb-8">Explore without sign in</Link>
       <div className="">
         {error ? (
           <p className="text-center bg-red-500 text-white mb-8 py-2 px-8 w-[80%] rounded mx-auto">

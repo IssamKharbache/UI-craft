@@ -8,7 +8,22 @@ import Button from "../buttons/Button";
 const NavBar = () => {
   const { data: session, status } = useSession();
   if (status === "loading") {
-    return <div className="">Loading</div>;
+    return (
+      
+
+<div role="status" className="flex items-center justify-between   mx-8 h-20  px-6 animate-pulse">
+   
+    <div className=" bg-gray-400 rounded w-32 h-10   mt-8"></div>
+    <div className=" "></div>
+    <div className="bg-white  w-32 h-10 rounded   mb-2.5 mx-auto mt-8 px-6"></div>
+   <div className="">
+   <div className="bg-gray-400  w-32 h-10 rounded   mb-2.5 mx-auto mt-8 px-6"></div>
+   </div>
+    <span className="sr-only">Loading...</span>
+</div>
+
+
+    )
   }
   return (
     <div className="bg-red-100 ">

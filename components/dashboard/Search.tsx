@@ -14,12 +14,9 @@ const Search = () => {
         <input
           type="text"
           placeholder="Search..."
-          className="px-4 rounded py-2 outline-none border-2 focus:border-red-200 "
+          className="px-4 rounded py-2 outline-none border-2 focus:border-red-200 flex-grow"
         />
-
-        <button className="flex items-center justify-center bg-slate-700 text-white rounded-full w-8 h-8">
-          <BiSearch />
-        </button>
+       
         <button
           onClick={() => setShowSeachBar(false)}
           className="flex items-center justify-center bg-red-500 text-white rounded-full w-8 h-8 e "

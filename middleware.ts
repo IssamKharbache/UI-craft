@@ -4,8 +4,9 @@ export default withAuth(
 {
     pages: {
         signIn: "/sign-in",
+        signOut:"/"
       },
 }
 )
 
-export const config = { matcher: ["/dashboard","/favorites","/categories"]}
+export const config = { matcher: ["/dashboard","/favorites","/categories","/settings"]}

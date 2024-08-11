@@ -6,7 +6,7 @@ import { getServerSession } from "next-auth";
 import { Poppins, Rubik } from "next/font/google";
 import React from "react";
 
-const rubik = Poppins({
+const rubik = Rubik({
   subsets: ["latin"],
   variable: "--font-rubik",
   weight: ["300", "400", "500", "600", "700", "800", "900"],
