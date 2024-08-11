@@ -33,6 +33,10 @@ interface AppContextType {
   showSeachBarObject:{
     showSearchBar:boolean;
     setShowSeachBar:React.Dispatch<React.SetStateAction<boolean>>;
+  },
+  showResponsiveSideBarObject:{
+    showResponsiveSearchBar:boolean;
+    setShowResSeachBar:React.Dispatch<React.SetStateAction<boolean>>;
   }
 }
 
@@ -48,6 +52,10 @@ const defaultState: AppContextType = {
   showSeachBarObject:{
     showSearchBar:false,
     setShowSeachBar:()=>{}
+  },
+  showResponsiveSideBarObject:{
+    showResponsiveSearchBar:false,
+    setShowResSeachBar:()=>{}
   }
 };
 const AppContext = createContext<AppContextType>(defaultState);
@@ -88,6 +96,8 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({
   });
   //
   const [showSearchBar,setShowSeachBar] = useState(false);
+  //
+  const [showResponsiveSearchBar,setShowResSeachBar] = useState(false);
 
   //update local storage when ever sidebar states changes
 
@@ -101,7 +111,8 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({
       value={{
         menuItemsObject: { menuItems, setMenuItems },
         sideBarOpen: { isOpen, setIsOpen },
-        showSeachBarObject:{showSearchBar,setShowSeachBar}
+        showSeachBarObject:{showSearchBar,setShowSeachBar},
+        showResponsiveSideBarObject:{showResponsiveSearchBar,setShowResSeachBar}
       }}
     >
       {children}

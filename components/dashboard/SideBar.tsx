@@ -19,7 +19,7 @@ const SideBar = () => {
     <div
       className={` ${
         isOpen ? "ml-0" : "-ml-[12%]"
-      } h-screen w-[320px]  p-6 pt-12 relative bg-red-100/80 md:flex flex-col items-center justify-between duration-700 hidden `}
+      } h-screen w-[320px]  p-6 pt-12 relative bg-red-100/80 lg:flex flex-col items-center justify-between duration-700 hidden `}
     >
       <div className="flex justify-between gap-4 ">
         <Logo />
@@ -39,7 +39,7 @@ const SideBar = () => {
           </button>
         )}
       </div>
-      <SideBarLinks />
+      <SideBarLinks isResp={false} />
       <LogoutButton />
     </div>
   );
