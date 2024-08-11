@@ -1,34 +1,11 @@
 "use client";
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { HiMiniHome } from "react-icons/hi2";
-import { TbCategory2 } from "react-icons/tb";
-import { IoIosHeart } from "react-icons/io";
 import { useAppContext } from '@/app/ContextApi';
 import { useWidth } from '@/utils/getDemensions';
 
 
 
-
-
-
-const links = [
-    {
-        name:"home",
-        href:"/dashboard",
-        icon:HiMiniHome 
-    },
-    {
-        name:"categories",
-        href:"/categories",
-        icon:TbCategory2 
-    },
-    {
-        name:"favorites",
-        href:"/favorites",
-        icon:IoIosHeart 
-    },
-]
 const SideBarLinks = ({isResp}:{isResp:boolean}) => {
   const width = useWidth();
   

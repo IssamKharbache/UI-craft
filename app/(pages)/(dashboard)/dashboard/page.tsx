@@ -1,9 +1,10 @@
+import Cards from '@/components/dashboard/main/Cards'
 import React from 'react'
 
 const DahboardPage = () => {
   return (
     <div>
-      Dashboard
+      <Cards />
     </div>
   )
 }

@@ -10,11 +10,11 @@ const Search = () => {
   } = useAppContext();
   if (showSearchBar) {
     return (
-      <div className="flex items-center gap-4">
+      <div className="flex  items-center gap-4">
         <input
           type="text"
           placeholder="Search..."
-          className="px-4 rounded py-2 outline-none border-2 focus:border-red-200  text-sm md:w-1/3 w-32 "
+          className="px-4 rounded py-2 outline-none border-2 focus:border-red-200  text-sm  w-32 md:w-1/3 md:mx-auto md:flex-grow "
         />
        
         <button
