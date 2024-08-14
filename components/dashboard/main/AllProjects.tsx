@@ -1,52 +1,76 @@
+"use client";
+import { useAppContext } from "@/app/ContextApi";
+import { Project } from "@/localData";
+import { TextToIcon } from "@/utils/TextToIcon";
 import { IoIosAdd } from "react-icons/io";
 
 const AllProjects = () => {
+  const {
+    allProjectsObject: { allProjects, setAllProjects, isLoading },
+  } = useAppContext();
   return (
-    <div className='bg-white w-full p-8 rounded-lg mt-4'>
-        {/* HEADER */}
-        <span className='text-lg flex gap-2 justify-between items-center'>
-            {/*  */}
-            <div className="flex gap-4 items-center">
-                <span className='font-bold text-lg'>All Projects</span>
-                <span className='text-[14px] text-red-500 cursor-pointer'>More</span>
-            </div>
-            {/* New Project button */}
-            <button className='flex items-center gap-2 text-white font-bold bg-primary hover:bg-primary-hover transition-all text-[12px] px-3 py-[2px] rounded-md'>
+    <div className="bg-white w-full p-8 rounded-lg mt-4">
+      {/* HEADER */}
+      <span className="text-lg flex gap-2 justify-between items-center">
+        {/*  */}
+        <div className="flex gap-4 items-center">
+          <span className="font-bold text-lg">All Projects</span>
+          <span className="text-[14px] text-red-500 cursor-pointer">More</span>
+        </div>
+        {/* New Project button */}
+        {!isLoading && allProjects.length > 0 && (
+          <button className="flex items-center gap-2 text-white font-bold bg-primary hover:bg-primary-hover transition-all text-[12px] px-3 py-[2px] rounded-md">
             <IoIosAdd size={25} />
             <span className="text-[13px]">New Project</span>
-            </button>
-        </span>
-        {/* projects */}
+          </button>
+        )}
+      </span>
+      {/* projects */}
+      {/* skeleton loader when loading data  */}
+      {isLoading && <div className="animate-pulse flex gap-4">
+        <div className="h-24 w-24 rounded-full bg-red-200 mt-4"></div>
+        <div className="h-24 w-24 rounded-full bg-red-200 mt-4"></div>
+        <div className="h-24 w-24 rounded-full bg-red-200 mt-4"></div>
+        <div className="h-24 w-24 rounded-full bg-red-200 mt-4"></div>
+        <div className="h-24 w-24 rounded-full bg-red-200 mt-4"></div>
+        <div className="h-24 w-24 rounded-full bg-red-200 mt-4"></div>
+        <div className="h-24 w-24 rounded-full bg-red-200 mt-4"></div>
+        </div>}
+        {/* check if there is no data */}
+      {!isLoading && allProjects.length === 0 ? (
+        <div className="bg-red-100  text-center mt-8 py-4 font-semibold">You have no projects yet</div>
+      ) : (
         <div className="flex flex-wrap gap-4 mt-7 mb-2 max-sm:grid max-sm:grid-cols-1">
-            <SingleProject />
-            <SingleProject />
-            <SingleProject />
-            <SingleProject />
-            <SingleProject />
-            <SingleProject />
-            <SingleProject />
-            <SingleProject />
+            {/* show projects if there is some */}
+          {allProjects?.map((project, index) => (
+            <div className="" key={index}>
+              <SingleProject singleProject={project} />
+            </div>
+          ))}
         </div>
+      )}
     </div>
-  )
-}
+  );
+};
 
 export default AllProjects;
 
-
-
-const SingleProject = () =>{
-    return(
-        <div className="w-[200px] border border-slate-100 rounded-md p-5 flex gap-2 justify-center flex-col items-center max-sm:w-full">
-            {/* THE ICON */}
-               <div className="w-[70px] h-[70px] bg-red-100 rounded-full flex items-center justify-center">
-               <IoIosAdd />
-               </div>
-               {/* name and component count */}
-               <div className="flex flex-col items-center justify-center">
-                <span className="font-semibold text-lg cursor-pointer hover:text-red-400 select-none">Buttons</span>
-                <span className="text-[12px] text-slate-400 text-center">10 Components</span>
-               </div>
-        </div>
-    )
-}
+const SingleProject = ({ singleProject }: { singleProject: Project }) => {
+  return (
+    <div className="w-[200px] border border-slate-100 rounded-md p-5 flex gap-2 justify-center flex-col items-center max-sm:w-full">
+      {/* THE ICON */}
+      <div className="w-[70px] h-[70px] bg-red-100 rounded-full flex items-center justify-center">
+        {TextToIcon({ text: singleProject.icon, size: "medium" })}
+      </div>
+      {/* name and component count */}
+      <div className="flex flex-col items-center justify-center">
+        <span className="font-semibold text-lg cursor-pointer hover:text-red-400 select-none">
+          {singleProject.name}
+        </span>
+        <span className="text-[12px] text-slate-400 text-center">
+          {singleProject.components.length} Components
+        </span>
+      </div>
+    </div>
+  );
+};

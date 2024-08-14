@@ -1,5 +1,6 @@
 "use client";
 
+import { AllprojectsData, Project } from "@/localData";
 import {
   createContext,
   ReactNode,
@@ -30,14 +31,19 @@ interface AppContextType {
     isOpen: boolean;
     setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
   };
-  showSeachBarObject:{
-    showSearchBar:boolean;
-    setShowSeachBar:React.Dispatch<React.SetStateAction<boolean>>;
-  },
-  showResponsiveSideBarObject:{
-    showResponsiveSearchBar:boolean;
-    setShowResSeachBar:React.Dispatch<React.SetStateAction<boolean>>;
-  }
+  showSeachBarObject: {
+    showSearchBar: boolean;
+    setShowSeachBar: React.Dispatch<React.SetStateAction<boolean>>;
+  };
+  showResponsiveSideBarObject: {
+    showResponsiveSearchBar: boolean;
+    setShowResSeachBar: React.Dispatch<React.SetStateAction<boolean>>;
+  };
+  allProjectsObject: {
+    allProjects: Project[];
+    setAllProjects: React.Dispatch<React.SetStateAction<Project[]>>;
+    isLoading:boolean;
+  };
 }
 
 const defaultState: AppContextType = {
@@ -49,14 +55,19 @@ const defaultState: AppContextType = {
     isOpen: true,
     setIsOpen: () => {},
   },
-  showSeachBarObject:{
-    showSearchBar:false,
-    setShowSeachBar:()=>{}
+  showSeachBarObject: {
+    showSearchBar: false,
+    setShowSeachBar: () => {},
   },
-  showResponsiveSideBarObject:{
-    showResponsiveSearchBar:false,
-    setShowResSeachBar:()=>{}
-  }
+  showResponsiveSideBarObject: {
+    showResponsiveSearchBar: false,
+    setShowResSeachBar: () => {},
+  },
+  allProjectsObject: {
+    allProjects: [],
+    setAllProjects: () => {},
+    isLoading:false,
+  },
 };
 const AppContext = createContext<AppContextType>(defaultState);
 //create default state
@@ -64,7 +75,7 @@ const AppContext = createContext<AppContextType>(defaultState);
 export const AppProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
-    //side bar menu
+  //side bar menu
   const [menuItems, setMenuItems] = useState<MenuItem[]>([
     {
       id: "1",
@@ -88,31 +99,49 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({
       isSelected: false,
     },
   ]);
-   //side bar opening state
+  //side bar opening state
   const [isOpen, setIsOpen] = useState(() => {
     if (typeof window === "undefined") return null;
     const storedValue = localStorage.getItem("openedSideBar");
     return storedValue !== null ? JSON.parse(storedValue) : true;
   });
   //
-  const [showSearchBar,setShowSeachBar] = useState(false);
+  const [showSearchBar, setShowSeachBar] = useState(false);
   //
-  const [showResponsiveSearchBar,setShowResSeachBar] = useState(false);
+  const [showResponsiveSearchBar, setShowResSeachBar] = useState(false);
+  //projects state
+  const [allProjects, setAllProjects] = useState<Project[]>([]);
+  const [isLoading,setIsLoading] = useState(false);
+
+  //simulate the fetch using set time out
+  useEffect(() => {
+    setIsLoading(true);
+    function fetchAllProjects() {
+      setTimeout(() => {
+        setAllProjects(AllprojectsData);
+        setIsLoading(false);
+      }, 3000);
+    }
+    fetchAllProjects();
+  }, []);
 
   //update local storage when ever sidebar states changes
 
   useEffect(() => {
     localStorage.setItem("openedSideBar", JSON.stringify(isOpen));
   }, [isOpen]);
-  
 
   return (
     <AppContext.Provider
       value={{
         menuItemsObject: { menuItems, setMenuItems },
         sideBarOpen: { isOpen, setIsOpen },
-        showSeachBarObject:{showSearchBar,setShowSeachBar},
-        showResponsiveSideBarObject:{showResponsiveSearchBar,setShowResSeachBar}
+        showSeachBarObject: { showSearchBar, setShowSeachBar },
+        showResponsiveSideBarObject: {
+          showResponsiveSearchBar,
+          setShowResSeachBar,
+        },
+        allProjectsObject: { allProjects, setAllProjects,isLoading },
       }}
     >
       {children}
