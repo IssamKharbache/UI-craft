@@ -4,6 +4,8 @@ import { Project } from "@/localData";
 import { TextToIcon } from "@/utils/TextToIcon";
 import { IoIosAdd } from "react-icons/io";
 
+import { GrChapterAdd } from "react-icons/gr";
+
 const AllProjects = () => {
   const {
     allProjectsObject: { allProjects, setAllProjects, isLoading },
@@ -27,21 +29,22 @@ const AllProjects = () => {
       </span>
       {/* projects */}
       {/* skeleton loader when loading data  */}
-      {isLoading && <div className="animate-pulse flex gap-4">
-        <div className="h-24 w-24 rounded-full bg-red-200 mt-4"></div>
-        <div className="h-24 w-24 rounded-full bg-red-200 mt-4"></div>
-        <div className="h-24 w-24 rounded-full bg-red-200 mt-4"></div>
-        <div className="h-24 w-24 rounded-full bg-red-200 mt-4"></div>
-        <div className="h-24 w-24 rounded-full bg-red-200 mt-4"></div>
-        <div className="h-24 w-24 rounded-full bg-red-200 mt-4"></div>
-        <div className="h-24 w-24 rounded-full bg-red-200 mt-4"></div>
-        </div>}
-        {/* check if there is no data */}
+      {isLoading && (
+        <div className="flex gap-8">
+        <LoadingSkeleton />
+        <LoadingSkeleton />
+        <LoadingSkeleton />
+        <LoadingSkeleton />
+        <LoadingSkeleton />
+        <LoadingSkeleton />
+        </div>
+      )}
+      {/* check if there is no data */}
       {!isLoading && allProjects.length === 0 ? (
-        <div className="bg-red-100  text-center mt-8 py-4 font-semibold">You have no projects yet</div>
+        <NoProjects />
       ) : (
         <div className="flex flex-wrap gap-4 mt-7 mb-2 max-sm:grid max-sm:grid-cols-1">
-            {/* show projects if there is some */}
+          {/* show projects if there is some */}
           {allProjects?.map((project, index) => (
             <div className="" key={index}>
               <SingleProject singleProject={project} />
@@ -71,6 +74,29 @@ const SingleProject = ({ singleProject }: { singleProject: Project }) => {
           {singleProject.components.length} Components
         </span>
       </div>
+    </div>
+  );
+};
+
+const LoadingSkeleton = () => {
+  return (
+    <div className="animate-pulse flex gap-4">
+      <div className="flex items-center flex-col gap-2">
+      <div className="h-16 w-16 rounded-full bg-red-200 mt-4"></div>
+      <div className="h-4 w-12 rounded-full bg-red-200 mt-4"></div>
+      <div className="h-4 w-24 rounded-full bg-red-200 mt-4"></div>
+      </div>
+      
+    </div>
+  );
+};
+
+const NoProjects = () => {
+  return (
+    <div className="flex flex-col gap-4 items-center bg-red-100/70  text-center mt-4 p-4  "><GrChapterAdd className="size-16"  />
+      <h1 className="font-semibold text-lg">You have no Projects yet</h1>
+      <p className="text-sm text-gray-500">Click below to add your project</p>
+      <button className="bg-primary px-4 py-2 rounded hover:bg-primary-hover transition text-white font-bold">Add new Project</button>
     </div>
   );
 };

@@ -29,7 +29,7 @@ export const AllprojectsData: Project[] = [
         name: "Form 1",
         projectName: "Forms",
         code: "",
-        isFavorite: true,
+        isFavorite: false,
         createdAt: "2022-01-01T00:00:00.000Z",
       },
       {

@@ -1,6 +1,7 @@
 "use client";
 
-import { AllprojectsData, Project } from "@/localData";
+import FavoriteComponents from "@/components/dashboard/main/FavoriteComponents";
+import { AllprojectsData, Component, Project } from "@/localData";
 import {
   createContext,
   ReactNode,
@@ -42,7 +43,12 @@ interface AppContextType {
   allProjectsObject: {
     allProjects: Project[];
     setAllProjects: React.Dispatch<React.SetStateAction<Project[]>>;
-    isLoading:boolean;
+    isLoading: boolean;
+  };
+  favoritesComponentObject: {
+    allFavoriteComponents: Component[];
+    setAllFavoriteComponents: React.Dispatch<React.SetStateAction<Component[]>>;
+    isFavoriteComponentsLoading: boolean,
   };
 }
 
@@ -66,7 +72,12 @@ const defaultState: AppContextType = {
   allProjectsObject: {
     allProjects: [],
     setAllProjects: () => {},
-    isLoading:false,
+    isLoading: false,
+  },
+  favoritesComponentObject: {
+    allFavoriteComponents: [],
+    setAllFavoriteComponents: () => {},
+    isFavoriteComponentsLoading: false,
   },
 };
 const AppContext = createContext<AppContextType>(defaultState);
@@ -111,11 +122,14 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({
   const [showResponsiveSearchBar, setShowResSeachBar] = useState(false);
   //projects state
   const [allProjects, setAllProjects] = useState<Project[]>([]);
-  const [isLoading,setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isFavoriteComponentsLoading, setIsFavoriteComponentsLoading] = useState(true);
+  const [allFavoriteComponents, setAllFavoriteComponents] = useState<
+    Component[]
+  >([]);
 
   //simulate the fetch using set time out
   useEffect(() => {
-    setIsLoading(true);
     function fetchAllProjects() {
       setTimeout(() => {
         setAllProjects(AllprojectsData);
@@ -124,6 +138,17 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({
     }
     fetchAllProjects();
   }, []);
+
+  //getting favorite components
+  useEffect(() => {
+    if (allProjects.length > 0) {
+      const favoriteComponents = allProjects.flatMap((project) =>
+        project.components.filter((component) => component.isFavorite)
+      );
+      setAllFavoriteComponents(favoriteComponents);
+      setIsFavoriteComponentsLoading(false);
+    }
+  }, [allProjects]);
 
   //update local storage when ever sidebar states changes
 
@@ -141,7 +166,12 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({
           showResponsiveSearchBar,
           setShowResSeachBar,
         },
-        allProjectsObject: { allProjects, setAllProjects,isLoading },
+        allProjectsObject: { allProjects, setAllProjects, isLoading },
+        favoritesComponentObject: {
+          allFavoriteComponents,
+          setAllFavoriteComponents,
+           isFavoriteComponentsLoading,
+        },
       }}
     >
       {children}
