@@ -23,7 +23,7 @@ const AllProjects = () => {
         {!isLoading && allProjects.length > 0 && (
           <button className="flex items-center gap-2 text-white font-bold bg-primary hover:bg-primary-hover transition-all text-[12px] px-3 py-[2px] rounded-md">
             <IoIosAdd size={25} />
-            <span className="text-[13px]">New Project</span>
+            <span className="text-[13px] max-sm:hidden">New Project</span>
           </button>
         )}
       </span>

@@ -36,7 +36,7 @@ const FavoriteComponents = () => {
         <span>Actions</span>
       </div>
       {
-        isFavoriteComponentsLoading && (
+        !isFavoriteComponentsLoading && (
           <>
           <LoadingFavoriteComponents />
           <LoadingFavoriteComponents />
@@ -115,12 +115,12 @@ const NoFavoriteComponents = () => {
 const LoadingFavoriteComponents = () => {
   return (
     <div className="animate-pulse grid grid-cols-4 text-sm items-center rounded-lg p-2 max-sm:grid-cols-2 ">
-      <div className="bg-red-300 h-5 w-16 rounded"></div>
-      <div className="bg-red-300 h-5 w-24"></div>
-      <div className="bg-red-300 h-8 w-20 rounded-full"></div>
+      <div className="bg-red-200 h-5 w-16 rounded "></div>
+      <div className="bg-red-200 h-5 w-24 rounded max-sm:hidden"></div>
+      <div className="bg-red-200 h-8 w-20 rounded-full max-sm:hidden "></div>
       <div className="flex gap-4 ">
-        <div className="bg-red-300 h-6 w-6 rounded-full"></div>
-        <div className="bg-red-300 h-6 w-6 rounded-full"></div>
+        <div className="bg-red-200 h-6 w-6 rounded-full"></div>
+        <div className="bg-red-200 h-6 w-6 rounded-full"></div>
       </div>
     </div>
   );
