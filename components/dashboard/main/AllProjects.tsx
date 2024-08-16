@@ -9,6 +9,7 @@ import { GrChapterAdd } from "react-icons/gr";
 const AllProjects = () => {
   const {
     allProjectsObject: { allProjects, setAllProjects, isLoading },
+    addProjectModelObject: { addModelOpen, setAddModelOpen },
   } = useAppContext();
   return (
     <div className="bg-white w-full p-8 rounded-lg mt-4">
@@ -21,7 +22,7 @@ const AllProjects = () => {
         </div>
         {/* New Project button */}
         {!isLoading && allProjects.length > 0 && (
-          <button className="flex items-center gap-2 text-white font-bold bg-primary hover:bg-primary-hover transition-all text-[12px] px-3 py-[2px] rounded-md">
+          <button onClick={() => setAddModelOpen(true)} className="flex items-center gap-2 text-white font-bold bg-primary hover:bg-primary-hover transition-all text-[12px] px-3 py-[2px] rounded-md">
             <IoIosAdd size={25} />
             <span className="text-[13px] max-sm:hidden">New Project</span>
           </button>

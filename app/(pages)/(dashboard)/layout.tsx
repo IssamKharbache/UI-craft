@@ -1,4 +1,5 @@
 import { AppProvider } from "@/app/ContextApi";
+import AddProjectModal from "@/components/dashboard/main/AddProjectModal";
 import NavBar from "@/components/dashboard/NavBar";
 import SideBar from "@/components/dashboard/SideBar";
 import AuthProvider from "@/utils/SessionProvider";
@@ -25,6 +26,7 @@ export default async function RootLayout({
         <AuthProvider session={session}>
           <AppProvider>
             <div className="flex">
+              <AddProjectModal />
               <SideBar />
               <div className="flex flex-col flex-1">
                 <NavBar />

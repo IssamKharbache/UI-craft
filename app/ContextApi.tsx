@@ -48,7 +48,11 @@ interface AppContextType {
   favoritesComponentObject: {
     allFavoriteComponents: Component[];
     setAllFavoriteComponents: React.Dispatch<React.SetStateAction<Component[]>>;
-    isFavoriteComponentsLoading: boolean,
+    isFavoriteComponentsLoading: boolean;
+  };
+  addProjectModelObject: {
+    addModelOpen: boolean;
+    setAddModelOpen: React.Dispatch<React.SetStateAction<boolean>>;
   };
 }
 
@@ -78,6 +82,10 @@ const defaultState: AppContextType = {
     allFavoriteComponents: [],
     setAllFavoriteComponents: () => {},
     isFavoriteComponentsLoading: false,
+  },
+  addProjectModelObject: {
+    addModelOpen: false,
+    setAddModelOpen: () => {},
   },
 };
 const AppContext = createContext<AppContextType>(defaultState);
@@ -123,10 +131,14 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({
   //projects state
   const [allProjects, setAllProjects] = useState<Project[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [isFavoriteComponentsLoading, setIsFavoriteComponentsLoading] = useState(true);
+  //favorite components state
+  const [isFavoriteComponentsLoading, setIsFavoriteComponentsLoading] =
+    useState(true);
   const [allFavoriteComponents, setAllFavoriteComponents] = useState<
     Component[]
   >([]);
+  //add project state
+  const [addModelOpen, setAddModelOpen] = useState(false);
 
   //simulate the fetch using set time out
   useEffect(() => {
@@ -170,7 +182,11 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({
         favoritesComponentObject: {
           allFavoriteComponents,
           setAllFavoriteComponents,
-           isFavoriteComponentsLoading,
+          isFavoriteComponentsLoading,
+        },
+        addProjectModelObject: {
+          addModelOpen,
+          setAddModelOpen,
         },
       }}
     >

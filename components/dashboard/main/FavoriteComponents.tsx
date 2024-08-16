@@ -36,7 +36,7 @@ const FavoriteComponents = () => {
         <span>Actions</span>
       </div>
       {
-        !isFavoriteComponentsLoading && (
+        isFavoriteComponentsLoading && (
           <>
           <LoadingFavoriteComponents />
           <LoadingFavoriteComponents />

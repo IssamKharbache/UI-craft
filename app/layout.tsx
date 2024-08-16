@@ -27,7 +27,9 @@ export default async function RootLayout({
     <html lang="en">
       <body className={rubik.className}>
         <AuthProvider session={session}>
-          <div className="">{children}</div>
+          <div className="">
+            {children}
+            </div>
         </AuthProvider>
       </body>
     </html>
