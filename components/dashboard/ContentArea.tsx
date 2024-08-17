@@ -6,13 +6,14 @@ import FavoriteComponents from './main/FavoriteComponents'
 import { useAppContext } from '@/app/ContextApi';
 
 const ContentArea = () => {
-    const {addProjectModelObject:{addModelOpen}} = useAppContext()
+    const {addProjectModelObject:{addModelOpen},iconModalObject:{iconModalOpen}} = useAppContext()
   return (
-    <div className='w-full bg-slate-50 md:p-8'>
+    <div className='w-full bg-slate-50 md:px-8'>
     <Cards />
     <AllProjects />
     <FavoriteComponents />
-    {addModelOpen && <SoftLayer />}
+    {addModelOpen  && <SoftLayer />}
+    {iconModalOpen  && <SoftLayer />}
   </div>
   )
 }

@@ -1,5 +1,7 @@
 import { AppProvider } from "@/app/ContextApi";
-import AddProjectModal from "@/components/dashboard/main/AddProjectModal";
+import AddProjectModal from "@/components/dashboard/main/projects/AddProjectModal";
+import IconsModal from "@/components/dashboard/main/projects/IconsModal";
+
 import NavBar from "@/components/dashboard/NavBar";
 import SideBar from "@/components/dashboard/SideBar";
 import AuthProvider from "@/utils/SessionProvider";
@@ -27,6 +29,7 @@ export default async function RootLayout({
           <AppProvider>
             <div className="flex">
               <AddProjectModal />
+              <IconsModal />
               <SideBar />
               <div className="flex flex-col flex-1">
                 <NavBar />

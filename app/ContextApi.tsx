@@ -54,6 +54,10 @@ interface AppContextType {
     addModelOpen: boolean;
     setAddModelOpen: React.Dispatch<React.SetStateAction<boolean>>;
   };
+  iconModalObject: {
+    iconModalOpen: boolean;
+    setIconModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  };
 }
 
 const defaultState: AppContextType = {
@@ -86,6 +90,10 @@ const defaultState: AppContextType = {
   addProjectModelObject: {
     addModelOpen: false,
     setAddModelOpen: () => {},
+  },
+  iconModalObject: {
+    iconModalOpen: false,
+    setIconModalOpen: () => {},
   },
 };
 const AppContext = createContext<AppContextType>(defaultState);
@@ -139,6 +147,8 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({
   >([]);
   //add project state
   const [addModelOpen, setAddModelOpen] = useState(false);
+  //icon modal state
+  const [iconModalOpen, setIconModalOpen] = useState(false);
 
   //simulate the fetch using set time out
   useEffect(() => {
@@ -164,9 +174,9 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({
 
   //update local storage when ever sidebar states changes
 
-  useEffect(() => {
-    localStorage.setItem("openedSideBar", JSON.stringify(isOpen));
-  }, [isOpen]);
+  // useEffect(() => {
+  //   localStorage.setItem("openedSideBar", JSON.stringify(isOpen));
+  // }, [isOpen]);
 
   return (
     <AppContext.Provider
@@ -187,6 +197,10 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({
         addProjectModelObject: {
           addModelOpen,
           setAddModelOpen,
+        },
+        iconModalObject: {
+          iconModalOpen,
+          setIconModalOpen,
         },
       }}
     >

@@ -2,15 +2,19 @@
 import { TbCategoryPlus } from "react-icons/tb";
 import { IoCloseOutline } from "react-icons/io5";
 import { useAppContext } from "@/app/ContextApi";
+import { RiApps2AddLine } from "react-icons/ri";
+import { SoftLayer } from "../../ContentArea";
 const AddProjectModal = () => {
   const {
     addProjectModelObject: { addModelOpen, setAddModelOpen },
+    iconModalObject: { iconModalOpen, setIconModalOpen },
   } = useAppContext();
   return (
+   
     <div
       className={`p-2 md:p-8 w-[80%] lg:w-[40%] border border-slate-50 bg-white rounded-md shadow-md  left-1/2 top-24 -translate-x-1/2 z-20 ${
         addModelOpen ? "absolute" : "hidden"
-      }`}
+      } ${iconModalOpen && "  bg-black opacity-90"}`}
     >
       {/*  */}
       {/* HEADER */}
@@ -30,14 +34,14 @@ const AddProjectModal = () => {
         <span className="text-[15px] font-medium">Project Name</span>
         <div className="flex flex-col md:flex-row gap-3">
           <input
-            className="outline-none border-2 border-slate-300 rounded-sm px-3 py-2"
+            className="outline-none border-2 border-slate-300 rounded-sm px-3 py-2 focus:border-primary"
             type="text"
-            placeholder="Enter category name"
+            placeholder="Enter Project Name..."
           />
           {/* icon */}
-          <div className="w-12 h-10 text-white flex items-center justify-center bg-red-200 rounded-lg cursor-pointer">
-            <TbCategoryPlus className="text-red-400 text-[20px]" />
-          </div>
+          <button onClick={()=>setIconModalOpen(true)}  className="w-12 h-10 text-white flex items-center justify-center bg-red-200 hover:bg-red-300/80 transition rounded-lg cursor-pointer">
+            <RiApps2AddLine className="text-red-400 text-[20px]" />
+          </button>
         </div>
       </div>
       {/* footer */}
