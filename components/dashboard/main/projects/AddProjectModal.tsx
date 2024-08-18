@@ -4,17 +4,19 @@ import { IoCloseOutline } from "react-icons/io5";
 import { useAppContext } from "@/app/ContextApi";
 import { RiApps2AddLine } from "react-icons/ri";
 import { SoftLayer } from "../../ContentArea";
-const AddProjectModal = () => {
+import { IconData } from "@/utils/allIconsData";
+import React from "react";
+import { SelectedIcon } from "@/app/(pages)/(dashboard)/dashboard/page";
+const AddProjectModal = ({ selectedIcon }: { selectedIcon: SelectedIcon }) => {
   const {
     addProjectModelObject: { addModelOpen, setAddModelOpen },
     iconModalObject: { iconModalOpen, setIconModalOpen },
   } = useAppContext();
   return (
-   
     <div
       className={`p-2 md:p-8 w-[80%] lg:w-[40%] border border-slate-50 bg-white rounded-md shadow-md  left-1/2 top-24 -translate-x-1/2 z-20 ${
         addModelOpen ? "absolute" : "hidden"
-      } ${iconModalOpen && "  bg-black opacity-90"}`}
+      }`}
     >
       {/*  */}
       {/* HEADER */}
@@ -24,10 +26,13 @@ const AddProjectModal = () => {
           <div className="w-[30px] h-[30px] bg-red-200 rounded-full flex items-center justify-center">
             <TbCategoryPlus className="text-red-400 text-[12px]" />
           </div>
-          {/* cateogry header */}  <span className="font-semibold text-lg">New Project</span>
-         
+          {/* cateogry header */}{" "}
+          <span className="font-semibold text-lg">New Project</span>
         </div>
-        <IoCloseOutline onClick={() => setAddModelOpen(false)} className="text-slate-700 text-[18px] cursor-pointer" />
+        <IoCloseOutline
+          onClick={() => setAddModelOpen(false)}
+          className="text-slate-700 text-[18px] cursor-pointer"
+        />
       </div>
       {/* body */}
       <div className="flex flex-col gap-2 mt-11 px-7">
@@ -39,8 +44,11 @@ const AddProjectModal = () => {
             placeholder="Enter Project Name..."
           />
           {/* icon */}
-          <button onClick={()=>setIconModalOpen(true)}  className="w-12 h-10 text-white flex items-center justify-center bg-red-200 hover:bg-red-300/80 transition rounded-lg cursor-pointer">
-            <RiApps2AddLine className="text-red-400 text-[20px]" />
+          <button
+            onClick={() => setIconModalOpen(true)}
+            className="w-12 h-10 text-white flex items-center justify-center bg-red-300 hover:bg-red-400/80 transition rounded-lg cursor-pointer"
+          >
+          {selectedIcon?.icon}
           </button>
         </div>
       </div>
