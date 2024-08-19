@@ -6,6 +6,7 @@ import AuthProvider from "@/utils/SessionProvider";
 import { getServerSession } from "next-auth";
 import { Rubik } from "next/font/google";
 import React from "react";
+import { Toaster } from "sonner";
 
 const rubik = Rubik({
   subsets: ["latin"],
@@ -25,6 +26,7 @@ export default async function RootLayout({
       <body className={rubik.className}>
         <AuthProvider session={session}>
           <AppProvider>
+            <Toaster  richColors closeButton />
             <div className="flex">
               <SideBar />
               <div className="flex flex-col flex-1">
