@@ -4,17 +4,32 @@ import Cards from './main/Cards'
 import AllProjects from './main/AllProjects'
 import FavoriteComponents from './main/FavoriteComponents'
 import { useAppContext } from '@/app/ContextApi';
+import ComponentPage from './main/componentpage/ComponentPage';
+import MainNavBar  from './NavBar';
+import NavBar from './main/componentpage/NavBar';
 
 const ContentArea = () => {
-    const {addProjectModelObject:{addModelOpen},iconModalObject:{iconModalOpen}} = useAppContext()
+    const {addProjectModelObject:{addModelOpen},iconModalObject:{iconModalOpen},showComponentPageObject:{showComponentPage}} = useAppContext();
+    if(showComponentPage){
+      return (
+        <>
+        <NavBar />
+        <ComponentPage />
+        </>
+      )
+    }
   return (
-    <div className='w-full bg-slate-50 md:px-8'>
+    <>
+     <MainNavBar />
+     <div className='w-full bg-slate-50 md:px-8 mt-16 ml-4'>
     <Cards />
     <AllProjects />
     <FavoriteComponents />
     {addModelOpen  && <SoftLayer />}
     {iconModalOpen  && <SoftLayer />}
   </div>
+    </>
+   
   )
 }
 

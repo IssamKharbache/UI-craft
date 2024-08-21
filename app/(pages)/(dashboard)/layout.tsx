@@ -30,8 +30,7 @@ export default async function RootLayout({
             <div className="flex">
               <SideBar />
               <div className="flex flex-col flex-1">
-                <NavBar />
-                <div className="mt-16 ml-4">{children}</div>
+                <div className="">{children}</div>
               </div>
             </div>
           </AppProvider>

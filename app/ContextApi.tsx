@@ -58,6 +58,10 @@ interface AppContextType {
     iconModalOpen: boolean;
     setIconModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
   };
+  showComponentPageObject: {
+    showComponentPage: boolean;
+    setShowComponentPage: React.Dispatch<React.SetStateAction<boolean>>;
+  }
 }
 
 const defaultState: AppContextType = {
@@ -95,6 +99,10 @@ const defaultState: AppContextType = {
     iconModalOpen: false,
     setIconModalOpen: () => {},
   },
+  showComponentPageObject:{
+    showComponentPage: false,
+    setShowComponentPage: () => {},
+  }
 };
 const AppContext = createContext<AppContextType>(defaultState);
 //create default state
@@ -149,6 +157,8 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({
   const [addModelOpen, setAddModelOpen] = useState(false);
   //icon modal state
   const [iconModalOpen, setIconModalOpen] = useState(false);
+  //component page state
+  const [showComponentPage, setShowComponentPage] = useState(false);
 
   //simulate the fetch using set time out
   useEffect(() => {
@@ -202,6 +212,10 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({
           iconModalOpen,
           setIconModalOpen,
         },
+        showComponentPageObject: {
+          showComponentPage,
+          setShowComponentPage,
+        }
       }}
     >
       {children}

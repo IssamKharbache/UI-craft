@@ -9,7 +9,9 @@ import { GrChapterAdd } from "react-icons/gr";
 const AllProjects = () => {
   const {
     allProjectsObject: { allProjects, setAllProjects, isLoading },
+    showComponentPageObject:{setShowComponentPage,showComponentPage},
     addProjectModelObject: { addModelOpen, setAddModelOpen },
+
   } = useAppContext();
   return (
     <div className="bg-white w-full p-8 rounded-lg mt-4">
@@ -60,6 +62,7 @@ const AllProjects = () => {
 export default AllProjects;
 
 const SingleProject = ({ singleProject }: { singleProject: Project }) => {
+  const {showComponentPageObject:{setShowComponentPage,showComponentPage}} = useAppContext();
   return (
     <div className="w-[200px] border border-slate-100 rounded-md p-5 flex gap-2 justify-center flex-col items-center max-sm:w-full">
       {/* THE ICON */}
@@ -68,7 +71,7 @@ const SingleProject = ({ singleProject }: { singleProject: Project }) => {
       </div>
       {/* name and component count */}
       <div className="flex flex-col items-center justify-center">
-        <span className="font-semibold text-lg cursor-pointer hover:text-red-400 select-none">
+        <span onClick={()=> setShowComponentPage(true)}  className="font-semibold text-lg cursor-pointer hover:text-red-400 select-none">
           {singleProject.name}
         </span>
         <span className="text-[12px] text-slate-400 text-center">

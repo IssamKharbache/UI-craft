@@ -53,7 +53,6 @@ const AddProjectModal = ({ selectedIcon }: { selectedIcon: SelectedIcon }) => {
       createdAt:new Date().toISOString(),
       components: [],
     }
-    console.log(newProject);
     
     //adding project
     try {
