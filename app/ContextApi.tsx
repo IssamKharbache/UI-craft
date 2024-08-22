@@ -61,7 +61,10 @@ interface AppContextType {
   showComponentPageObject: {
     showComponentPage: boolean;
     setShowComponentPage: React.Dispatch<React.SetStateAction<boolean>>;
-  }
+    isMenuOpen: boolean;
+    setMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  };
+ 
 }
 
 const defaultState: AppContextType = {
@@ -102,6 +105,8 @@ const defaultState: AppContextType = {
   showComponentPageObject:{
     showComponentPage: false,
     setShowComponentPage: () => {},
+    isMenuOpen: false,
+    setMenuOpen: () => {},
   }
 };
 const AppContext = createContext<AppContextType>(defaultState);
@@ -159,6 +164,7 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({
   const [iconModalOpen, setIconModalOpen] = useState(false);
   //component page state
   const [showComponentPage, setShowComponentPage] = useState(false);
+  const [isMenuOpen, setMenuOpen] = useState(false);
 
   //simulate the fetch using set time out
   useEffect(() => {
@@ -215,6 +221,8 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({
         showComponentPageObject: {
           showComponentPage,
           setShowComponentPage,
+          isMenuOpen,
+          setMenuOpen,
         }
       }}
     >

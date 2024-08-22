@@ -1,8 +1,11 @@
 import React from 'react'
-
+import NavBar from '@/components/dashboard/NavBar';
 const FavotitesPage = () => {
   return (
-    <div>FavotitesPage</div>
+    <div>
+      <NavBar />
+      FavotitesPage
+      </div>
   )
 }
 

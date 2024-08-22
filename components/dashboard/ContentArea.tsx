@@ -21,7 +21,7 @@ const ContentArea = () => {
   return (
     <>
      <MainNavBar />
-     <div className='w-full bg-slate-50 md:px-8 mt-16 ml-4'>
+     <div className='w-full bg-slate-50 md:px-8 mt-16 '>
     <Cards />
     <AllProjects />
     <FavoriteComponents />

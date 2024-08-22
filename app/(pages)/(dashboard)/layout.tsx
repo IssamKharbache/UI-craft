@@ -29,6 +29,7 @@ export default async function RootLayout({
             <Toaster  richColors closeButton />
             <div className="flex">
               <SideBar />
+             
               <div className="flex flex-col flex-1">
                 <div className="">{children}</div>
               </div>
