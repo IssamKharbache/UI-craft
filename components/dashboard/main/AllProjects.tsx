@@ -70,9 +70,9 @@ const SingleProject = ({ singleProject }: { singleProject: Project }) => {
   }
   return (
     <div className="w-[200px] border border-slate-100 rounded-md p-5 flex gap-2 justify-center flex-col items-center max-sm:w-full">
-      {/* THE ICON */}
+      {/* THE ICON  */}
       <div className="w-[70px] h-[70px] bg-red-100 rounded-full flex items-center justify-center">
-        {TextToIcon({ text: singleProject.icon, size: "medium" })}
+        {TextToIcon({text:singleProject.icon ,size: "medium"})}
       </div>
       {/* name and component count */}
       <div className="flex flex-col items-center justify-center">

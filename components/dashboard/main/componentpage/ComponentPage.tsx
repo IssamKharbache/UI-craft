@@ -3,6 +3,7 @@ import { useAppContext } from "@/app/ContextApi";
 import SingleComponentPage from "./SingleComponent";
 import AddIcon from '@mui/icons-material/Add';
 import AppsOutageIcon from '@mui/icons-material/AppsOutage';
+import { TextToIcon } from "@/utils/TextToIcon";
 
 const ComponentPage = () => {
   const {
@@ -13,7 +14,7 @@ const ComponentPage = () => {
     return (
       <div className="flex flex-col gap-4 items-center justify-center mt-44">
           <div className="bg-red-200 h-32 w-32 rounded-full flex items-center justify-center text-7xl">
-            <AppsOutageIcon fontSize="inherit" className="text-red-400 text-4xl"/>
+           {selectedProject.icon !== undefined && TextToIcon({text:selectedProject.icon ,size: "large"})}
           </div>
         <h1 className="text-lg font-bold ">
          There is no component in this project yet

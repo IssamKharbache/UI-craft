@@ -20,8 +20,6 @@ const AddProjectModal = ({ selectedIcon }: { selectedIcon: SelectedIcon }) => {
   } = useAppContext();
 
   const {data:session} = useSession();
-  console.log(session);
-  
   
 
   const handleInputUpdate = (e: any) => {
@@ -59,6 +57,7 @@ const AddProjectModal = ({ selectedIcon }: { selectedIcon: SelectedIcon }) => {
       setAllProjects([...AllprojectsData, newProject]);
       setAddModelOpen(false);
       toast.success("Project added successfully",{position: "top-center" ,style: {fontWeight: "bold",}});
+      setProjectName("");
     } catch (error) {
       toast.error("Error adding project",{position: "top-center" ,style: {fontWeight: "bold",}});
     }
