@@ -62,7 +62,12 @@ const AllProjects = () => {
 export default AllProjects;
 
 const SingleProject = ({ singleProject }: { singleProject: Project }) => {
-  const {showComponentPageObject:{setShowComponentPage,showComponentPage}} = useAppContext();
+  
+  const {showComponentPageObject:{setShowComponentPage,showComponentPage},selectedProjectObject:{setSelectedProject}} = useAppContext();
+  const projectClicked = () => {
+    setSelectedProject(singleProject);
+    setShowComponentPage(true);
+  }
   return (
     <div className="w-[200px] border border-slate-100 rounded-md p-5 flex gap-2 justify-center flex-col items-center max-sm:w-full">
       {/* THE ICON */}
@@ -71,7 +76,10 @@ const SingleProject = ({ singleProject }: { singleProject: Project }) => {
       </div>
       {/* name and component count */}
       <div className="flex flex-col items-center justify-center">
-        <span onClick={()=> setShowComponentPage(true)}  className="font-semibold text-lg cursor-pointer hover:text-red-400 select-none">
+        <span onClick={()=> {
+          setShowComponentPage(true);
+          projectClicked();
+        }}  className="font-semibold text-lg cursor-pointer hover:text-red-400 select-none">
           {singleProject.name}
         </span>
         <span className="text-[12px] text-slate-400 text-center">
