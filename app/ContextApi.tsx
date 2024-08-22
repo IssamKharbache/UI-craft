@@ -64,7 +64,10 @@ interface AppContextType {
     isMenuOpen: boolean;
     setMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
   };
- 
+  selectedProjectObject: {
+    selectedProject: Project | null;
+    setSelectedProject: React.Dispatch<React.SetStateAction<Project | null>>;
+  };
 }
 
 const defaultState: AppContextType = {
@@ -102,12 +105,16 @@ const defaultState: AppContextType = {
     iconModalOpen: false,
     setIconModalOpen: () => {},
   },
-  showComponentPageObject:{
+  showComponentPageObject: {
     showComponentPage: false,
     setShowComponentPage: () => {},
     isMenuOpen: false,
     setMenuOpen: () => {},
-  }
+  },
+  selectedProjectObject: {
+    selectedProject: null,
+    setSelectedProject: () => {},
+  },
 };
 const AppContext = createContext<AppContextType>(defaultState);
 //create default state
@@ -166,6 +173,9 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({
   const [showComponentPage, setShowComponentPage] = useState(false);
   const [isMenuOpen, setMenuOpen] = useState(false);
 
+  //
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+
   //simulate the fetch using set time out
   useEffect(() => {
     function fetchAllProjects() {
@@ -223,7 +233,11 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({
           setShowComponentPage,
           isMenuOpen,
           setMenuOpen,
-        }
+        },
+        selectedProjectObject: {
+          selectedProject,
+          setSelectedProject,
+        },
       }}
     >
       {children}

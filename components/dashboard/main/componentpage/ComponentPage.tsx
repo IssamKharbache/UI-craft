@@ -1,15 +1,18 @@
 "use client";
-import { useAppContext } from '@/app/ContextApi';
-import React from 'react'
+import { useAppContext } from "@/app/ContextApi";
+import SingleComponentPage from "./SingleComponent";
 
 const ComponentPage = () => {
-  const {showComponentPageObject:{setShowComponentPage,showComponentPage}} = useAppContext();
+  const {
+    showComponentPageObject: { setShowComponentPage, showComponentPage },
+  } = useAppContext();
   return (
-    <div className='flex gap-4 w-full h-[calc(100vh-64px)]  bg-slate-50'>
-        <span>Component page</span>
-        <span className='cursor-pointer ' onClick={() => setShowComponentPage(false)}>Back</span>
+    <div className="flex flex-col gap-4 overflow-auto max-h-[830px]">
+      <SingleComponentPage />
+      <SingleComponentPage />
+      <SingleComponentPage />
     </div>
-  )
-}
+  );
+};
 
-export default ComponentPage
+export default ComponentPage;
