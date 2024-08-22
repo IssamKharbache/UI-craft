@@ -131,85 +131,410 @@ type IconName =
   | "LocalLibraryIcon"
   | "MapsHomeWorkIcon";
 
-const iconMapping: Record<IconName, JSX.Element> = {
-  CodeIcon: <CodeIcon className="text-[30px] text-primary" />,
-  BuildIcon: <BuildIcon className="text-[30px] text-primary" />,
-  ComputerIcon: <ComputerIcon className="text-[30px] text-primary" />,
-  PhoneIcon: <PhoneIcon className="text-[30px] text-primary" />,
-  TabletIcon: <TabletIcon className="text-[30px] text-primary" />,
-  DesktopMacIcon: <DesktopMacIcon className="text-[30px] text-primary" />,
-  StorageIcon: <StorageIcon className="text-[30px] text-primary" />,
-  BugReportIcon: <BugReportIcon className="text-[30px] text-primary" />,
-  PaletteIcon: <PaletteIcon className="text-[30px] text-primary" />,
-  SettingsIcon: <SettingsIcon className="text-[30px] text-primary" />,
-  FolderIcon: <FolderIcon className="text-[30px] text-primary" />,
-  ExtensionIcon: <ExtensionIcon className="text-[30px] text-primary" />,
-  WebIcon: <WebIcon className="text-[30px] text-primary" />,
-  MenuIcon: <MenuIcon className="text-[30px] text-primary" />,
-  DescriptionIcon: <DescriptionIcon className="text-[30px] text-primary" />,
-  DeveloperModeIcon: <DeveloperModeIcon className="text-[30px] text-primary" />,
-  AddIcon: <AddIcon className="text-[30px] text-primary" />,
-  RemoveIcon: <RemoveIcon className="text-[30px] text-primary" />,
-  SearchIcon: <SearchIcon className="text-[30px] text-primary" />,
-  PersonIcon: <PersonIcon className="text-[30px] text-primary" />,
-  LockIcon: <LockIcon className="text-[30px] text-primary" />,
-  LockOpenIcon: <LockOpenIcon className="text-[30px] text-primary" />,
-  VisibilityIcon: <VisibilityIcon className="text-[30px] text-primary" />,
-  VisibilityOffIcon: <VisibilityOffIcon className="text-[30px] text-primary" />,
-  FileCopyIcon: <FileCopyIcon className="text-[30px] text-primary" />,
-  FormatListBulletedIcon: <FormatListBulletedIcon className="text-[30px] text-primary" />,
-  CloudUploadIcon: <CloudUploadIcon className="text-[30px] text-primary" />,
-  CloudDownloadIcon: <CloudDownloadIcon className="text-[30px] text-primary" />,
-  ErrorIcon: <ErrorIcon className="text-[30px] text-primary" />,
-  InfoIcon: <InfoIcon className="text-[30px] text-primary" />,
-  HelpIcon: <HelpIcon className="text-[30px] text-primary" />,
-  LinkIcon: <LinkIcon className="text-[30px] text-primary" />,
-  ShareIcon: <ShareIcon className="text-[30px] text-primary" />,
-  GitHubIcon: <GitHubIcon className="text-[30px] text-primary" />,
-  TwitterIcon: <TwitterIcon className="text-[30px] text-primary" />,
-  FacebookIcon: <FacebookIcon className="text-[30px] text-primary" />,
-  LinkedInIcon: <LinkedInIcon className="text-[30px] text-primary" />,
-  InstagramIcon: <InstagramIcon className="text-[30px] text-primary" />,
-  MailIcon: <MailIcon className="text-[30px] text-primary" />,
-  PhoneInTalkIcon: <PhoneInTalkIcon className="text-[30px] text-primary" />,
-  LogoutIcon: <LogoutIcon className="text-[30px] text-primary" />,
-  LoginIcon: <LoginIcon className="text-[30px] text-primary" />,
-  DashboardIcon: <DashboardIcon className="text-[30px] text-primary" />,
-  CalendarTodayIcon: <CalendarTodayIcon className="text-[30px] text-primary" />,
-  AlarmIcon: <AlarmIcon className="text-[30px] text-primary" />,
-  BookmarkIcon: <BookmarkIcon className="text-[30px] text-primary" />,
-  EditIcon: <EditIcon className="text-[30px] text-primary" />,
-  CheckCircleIcon: <CheckCircleIcon className="text-[30px] text-primary" />,
-  CloseIcon: <CloseIcon className="text-[30px] text-primary" />,
-  WarningIcon: <WarningIcon className="text-[30px] text-primary" />,
-  MoreVertIcon: <MoreVertIcon className="text-[30px] text-primary" />,
-  MenuOpenIcon: <MenuOpenIcon className="text-[30px] text-primary" />,
-  HomeIcon: <HomeIcon className="text-[30px] text-primary" />,
-  AddCircleIcon: <AddCircleIcon className="text-[30px] text-primary" />,
-  RemoveCircleIcon: <RemoveCircleIcon className="text-[30px] text-primary" />,
-  BuildCircleIcon: <BuildCircleIcon className="text-[30px] text-primary" />,
-  BuildSharpIcon: <BuildSharpIcon className="text-[30px] text-primary" />,
-  CodeSharpIcon: <CodeSharpIcon className="text-[30px] text-primary" />,
-  DesktopWindowsIcon: <DesktopWindowsIcon className="text-[30px] text-primary" />,
-  DevicesIcon: <DevicesIcon className="text-[30px] text-primary" />,
-  LanguageIcon: <LanguageIcon className="text-[30px] text-primary" />,
-  LocalLibraryIcon: <LocalLibraryIcon className="text-[30px] text-primary" />,
-  MapsHomeWorkIcon: <MapsHomeWorkIcon className="text-[30px] text-primary" />,
-};
 export const TextToIcon = ({
   text,
   size,
+  fontSize,
+  className,
 }: {
   text: IconName;
+  fontSize?: number;
   size?: "small" | "medium" | "large";
+  className?: string;
 }) => {
+  const iconMapping: Record<IconName, JSX.Element> = {
+    CodeIcon: (
+      <CodeIcon
+         
+        sx={{ fontSize: fontSize }}
+        className={`text-red-300 ${className}`}
+      />
+    ),
+    BuildIcon: (
+      <BuildIcon
+        sx={{ fontSize: fontSize }}
+        className={`text-red-300 ${className}`}
+      />
+    ),
+    ComputerIcon: (
+      <ComputerIcon
+        sx={{ fontSize: fontSize }}
+        className={`text-red-300 ${className}`}
+      />
+    ),
+    PhoneIcon: (
+      <PhoneIcon
+        sx={{ fontSize: fontSize }}
+        className={`text-red-300 ${className}`}
+      />
+    ),
+    TabletIcon: (
+      <TabletIcon
+        sx={{ fontSize: fontSize }}
+        className={`text-red-300 ${className}`}
+      />
+    ),
+    DesktopMacIcon: (
+      <DesktopMacIcon
+        sx={{ fontSize: fontSize }}
+        className={`text-red-300 ${className}`}
+      />
+    ),
+    StorageIcon: (
+      <StorageIcon
+        sx={{ fontSize: fontSize }}
+        className={`text-red-300 ${className}`}
+      />
+    ),
+    BugReportIcon: (
+      <BugReportIcon
+        sx={{ fontSize: fontSize }}
+        className={`text-red-300 ${className}`}
+      />
+    ),
+    PaletteIcon: (
+      <PaletteIcon
+        sx={{ fontSize: fontSize }}
+        className={`text-red-300 ${className}`}
+      />
+    ),
+    SettingsIcon: (
+      <SettingsIcon
+        sx={{ fontSize: fontSize }}
+        className={`text-red-300 ${className}`}
+      />
+    ),
+    FolderIcon: (
+      <FolderIcon
+        sx={{ fontSize: fontSize }}
+        className={`text-red-300 ${className}`}
+      />
+    ),
+    ExtensionIcon: (
+      <ExtensionIcon
+        sx={{ fontSize: fontSize }}
+        className={`text-red-300 ${className}`}
+      />
+    ),
+    WebIcon: (
+      <WebIcon
+        sx={{ fontSize: fontSize }}
+        className={`text-red-300 ${className}`}
+      />
+    ),
+    MenuIcon: (
+      <MenuIcon
+        sx={{ fontSize: fontSize }}
+        className={`text-red-300 ${className}`}
+      />
+    ),
+    DescriptionIcon: (
+      <DescriptionIcon
+        sx={{ fontSize: fontSize }}
+        className={`text-red-300 ${className}`}
+      />
+    ),
+    DeveloperModeIcon: (
+      <DeveloperModeIcon
+        sx={{ fontSize: fontSize }}
+        className={`text-red-300 ${className}`}
+      />
+    ),
+    AddIcon: (
+      <AddIcon
+        sx={{ fontSize: fontSize }}
+        className={`text-red-300 ${className}`}
+      />
+    ),
+    RemoveIcon: (
+      <RemoveIcon
+        sx={{ fontSize: fontSize }}
+        className={`text-red-300 ${className}`}
+      />
+    ),
+    SearchIcon: (
+      <SearchIcon
+        sx={{ fontSize: fontSize }}
+        className={`text-red-300 ${className}`}
+      />
+    ),
+    PersonIcon: (
+      <PersonIcon
+        sx={{ fontSize: fontSize }}
+        className={`text-red-300 ${className}`}
+      />
+    ),
+    LockIcon: (
+      <LockIcon
+        sx={{ fontSize: fontSize }}
+        className={`text-red-300 ${className}`}
+      />
+    ),
+    LockOpenIcon: (
+      <LockOpenIcon
+        sx={{ fontSize: fontSize }}
+        className={`text-red-300 ${className}`}
+      />
+    ),
+    VisibilityIcon: (
+      <VisibilityIcon
+        sx={{ fontSize: fontSize }}
+        className={`text-red-300 ${className}`}
+      />
+    ),
+    VisibilityOffIcon: (
+      <VisibilityOffIcon
+        sx={{ fontSize: fontSize }}
+        className={`text-red-300 ${className}`}
+      />
+    ),
+    FileCopyIcon: (
+      <FileCopyIcon
+        sx={{ fontSize: fontSize }}
+        className={`text-red-300 ${className}`}
+      />
+    ),
+    FormatListBulletedIcon: (
+      <FormatListBulletedIcon
+        sx={{ fontSize: fontSize }}
+        className={`text-red-300 ${className}`}
+      />
+    ),
+    CloudUploadIcon: (
+      <CloudUploadIcon
+        sx={{ fontSize: fontSize }}
+        className={`text-red-300 ${className}`}
+      />
+    ),
+    CloudDownloadIcon: (
+      <CloudDownloadIcon
+        sx={{ fontSize: fontSize }}
+        className={`text-red-300 ${className}`}
+      />
+    ),
+    ErrorIcon: (
+      <ErrorIcon
+        sx={{ fontSize: fontSize }}
+        className={`text-red-300 ${className}`}
+      />
+    ),
+    InfoIcon: (
+      <InfoIcon
+        sx={{ fontSize: fontSize }}
+        className={`text-red-300 ${className}`}
+      />
+    ),
+    HelpIcon: (
+      <HelpIcon
+        sx={{ fontSize: fontSize }}
+        className={`text-red-300 ${className}`}
+      />
+    ),
+    LinkIcon: (
+      <LinkIcon
+        sx={{ fontSize: fontSize }}
+        className={`text-red-300 ${className}`}
+      />
+    ),
+    ShareIcon: (
+      <ShareIcon
+        sx={{ fontSize: fontSize }}
+        className={`text-red-300 ${className}`}
+      />
+    ),
+    GitHubIcon: (
+      <GitHubIcon
+        sx={{ fontSize: fontSize }}
+        className={`text-red-300 ${className}`}
+      />
+    ),
+    TwitterIcon: (
+      <TwitterIcon
+        sx={{ fontSize: fontSize }}
+        className={`text-red-300 ${className}`}
+      />
+    ),
+    FacebookIcon: (
+      <FacebookIcon
+        sx={{ fontSize: fontSize }}
+        className={`text-red-300 ${className}`}
+      />
+    ),
+    LinkedInIcon: (
+      <LinkedInIcon
+        sx={{ fontSize: fontSize }}
+        className={`text-red-300 ${className}`}
+      />
+    ),
+    InstagramIcon: (
+      <InstagramIcon
+        sx={{ fontSize: fontSize }}
+        className={`text-red-300 ${className}`}
+      />
+    ),
+    MailIcon: (
+      <MailIcon
+        sx={{ fontSize: fontSize }}
+        className={`text-red-300 ${className}`}
+      />
+    ),
+    PhoneInTalkIcon: (
+      <PhoneInTalkIcon
+        sx={{ fontSize: fontSize }}
+        className={`text-red-300 ${className}`}
+      />
+    ),
+    LogoutIcon: (
+      <LogoutIcon
+        sx={{ fontSize: fontSize }}
+        className={`text-red-300 ${className}`}
+      />
+    ),
+    LoginIcon: (
+      <LoginIcon
+        sx={{ fontSize: fontSize }}
+        className={`text-red-300 ${className}`}
+      />
+    ),
+    DashboardIcon: (
+      <DashboardIcon
+        sx={{ fontSize: fontSize }}
+        className={`text-red-300 ${className}`}
+      />
+    ),
+    CalendarTodayIcon: (
+      <CalendarTodayIcon
+        sx={{ fontSize: fontSize }}
+        className={`text-red-300 ${className}`}
+      />
+    ),
+    AlarmIcon: (
+      <AlarmIcon
+        sx={{ fontSize: fontSize }}
+        className={`text-red-300 ${className}`}
+      />
+    ),
+    BookmarkIcon: (
+      <BookmarkIcon
+        sx={{ fontSize: fontSize }}
+        className={`text-red-300 ${className}`}
+      />
+    ),
+    EditIcon: (
+      <EditIcon
+        sx={{ fontSize: fontSize }}
+        className={`text-red-300 ${className}`}
+      />
+    ),
+    CheckCircleIcon: (
+      <CheckCircleIcon
+        sx={{ fontSize: fontSize }}
+        className={`text-red-300 ${className}`}
+      />
+    ),
+    CloseIcon: (
+      <CloseIcon
+        sx={{ fontSize: fontSize }}
+        className={`text-red-300 ${className}`}
+      />
+    ),
+    WarningIcon: (
+      <WarningIcon
+        sx={{ fontSize: fontSize }}
+        className={`text-red-300 ${className}`}
+      />
+    ),
+    MoreVertIcon: (
+      <MoreVertIcon
+        sx={{ fontSize: fontSize }}
+        className={`text-red-300 ${className}`}
+      />
+    ),
+    MenuOpenIcon: (
+      <MenuOpenIcon
+        sx={{ fontSize: fontSize }}
+        className={`text-red-300 ${className}`}
+      />
+    ),
+    HomeIcon: (
+      <HomeIcon
+        sx={{ fontSize: fontSize }}
+        className={`text-red-300 ${className}`}
+      />
+    ),
+    AddCircleIcon: (
+      <AddCircleIcon
+        sx={{ fontSize: fontSize }}
+        className={`text-red-300 ${className}`}
+      />
+    ),
+
+    RemoveCircleIcon: (
+      <RemoveCircleIcon
+        sx={{ fontSize: fontSize }}
+        className={`text-red-300 ${className}`}
+      />
+    ),
+    BuildCircleIcon: (
+      <BuildCircleIcon
+        sx={{ fontSize: fontSize }}
+        className={`text-red-300 ${className}`}
+      />
+    ),
+    BuildSharpIcon: (
+      <BuildSharpIcon
+        sx={{ fontSize: fontSize }}
+        className={`text-red-300 ${className}`}
+      />
+    ),
+    CodeSharpIcon: (
+      <CodeSharpIcon
+        sx={{ fontSize: fontSize }}
+        className={`text-red-300 ${className}`}
+      />
+    ),
+    DesktopWindowsIcon: (
+      <DesktopWindowsIcon
+        sx={{ fontSize: fontSize }}
+        className={`text-red-300 ${className}`}
+      />
+    ),
+    DevicesIcon: (
+      <DevicesIcon
+        sx={{ fontSize: fontSize }}
+        className={`text-red-300 ${className}`}
+      />
+    ),
+    LanguageIcon: (
+      <LanguageIcon
+        sx={{ fontSize: fontSize }}
+        className={`text-red-300 ${className}`}
+      />
+    ),
+    LocalLibraryIcon: (
+      <LocalLibraryIcon
+        sx={{ fontSize: fontSize }}
+        className={`text-red-300 ${className}`}
+      />
+    ),
+    MapsHomeWorkIcon: (
+      <MapsHomeWorkIcon
+        sx={{ fontSize: fontSize }}
+        className={`text-red-300 ${className}`}
+      />
+    ),
+  };
   return (
     iconMapping[text] || (
-      <CategoryIcon fontSize={size} className="text-primary" />
+      <CategoryIcon
+        fontSize={size}
+        sx={{ fontSize: fontSize }}
+        className={`text-red-300 ${className}`}
+      />
     )
   );
 };
 
 // export const  TextToIcon = ({text,size}:{text:string,size?:"small"|"medium"|"large"}) => {
-//     return iconMapping[text] || <CategoryIcon fontSize={size} className="text-primary" />;
+//     return iconMapping[text] || <CategoryIcon fontSize={size} className=" />;
 // }
