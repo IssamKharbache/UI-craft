@@ -196,7 +196,7 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({
       setAllFavoriteComponents(favoriteComponents);
       setIsFavoriteComponentsLoading(false);
     }
-  }, [allProjects]);
+  }, [allProjects,selectedProject]);
 
   //update local storage when ever sidebar states changes
 

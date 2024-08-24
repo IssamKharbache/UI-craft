@@ -2,7 +2,6 @@
 import { useAppContext } from "@/app/ContextApi";
 import SingleComponentPage from "./SingleComponent";
 import AddIcon from '@mui/icons-material/Add';
-import AppsOutageIcon from '@mui/icons-material/AppsOutage';
 import { TextToIcon } from "@/utils/TextToIcon";
 
 const ComponentPage = () => {
