@@ -44,6 +44,7 @@ const SingleComponentPage = ({ component }: { component: Component }) => {
     const newAllProjects = allProjects.map((project: Project) => {
       const updatedComponent = project.components.map((comp: Component) => {
         if (comp._id === component._id) {
+          setIsFavorited(!comp.isFavorite);
           return { ...comp, isFavorite: !comp.isFavorite };
         }
         return comp;
