@@ -5,6 +5,7 @@ import IconsModal from '@/components/dashboard/main/projects/IconsModal';
 import { useState } from 'react';
 import { IoIosAdd } from 'react-icons/io';
 import AcUnitIcon from '@mui/icons-material/AcUnit';
+import DeleteModal from '@/components/dashboard/main/componentpage/DeleteModal';
 
 
 export interface SelectedIcon {
@@ -23,6 +24,7 @@ const DahboardPage = () => {
   return (
   <>
     <AddProjectModal selectedIcon={selectedIcon} />
+    <DeleteModal />
     <IconsModal onUpdateIconSelected={getIconSelected} />
    <ContentArea />
   </>

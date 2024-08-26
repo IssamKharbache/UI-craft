@@ -9,7 +9,10 @@ const DropDown = () => {
   const dropDownRef = useRef<HTMLDivElement>(null);
   const {
     dropDownObject: { openDropdown, setOpenDropdown, dropDownPositions },
+    deleteModalObject:{openDeleteModal,setOpenDeleteModal},
   } = useAppContext();
+  console.log(openDeleteModal);
+  
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (
@@ -60,7 +63,7 @@ const DropDown = () => {
       {/* devider line */}
       <hr className="border-t border-slate-200" />
       {/* delete icon  */}
-      <div className="flex gap-1 items-center text-slate-600 cursor-pointer hover:text-red-400">
+      <div onClick={()=>setOpenDeleteModal(true)} className="flex gap-1 items-center text-slate-600 cursor-pointer hover:text-red-400">
         <DeleteOutlineOutlined sx={{ fontSize: 21 }} className="text" />
         <span className="text-[14px]">Delete</span>
       </div>

@@ -9,7 +9,7 @@ import MainNavBar  from './NavBar';
 import NavBar from './main/componentpage/NavBar';
 
 const ContentArea = () => {
-    const {addProjectModelObject:{addModelOpen},iconModalObject:{iconModalOpen},showComponentPageObject:{showComponentPage}} = useAppContext();
+    const {addProjectModelObject:{addModelOpen},iconModalObject:{iconModalOpen},showComponentPageObject:{showComponentPage},deleteModalObject:{openDeleteModal}} = useAppContext();
     if(showComponentPage){
       return (
         <>
@@ -25,8 +25,7 @@ const ContentArea = () => {
     <Cards />
     <AllProjects />
     <FavoriteComponents />
-    {addModelOpen  && <SoftLayer />}
-    {iconModalOpen  && <SoftLayer />}
+    {(addModelOpen || openDeleteModal) && <SoftLayer />}
   </div>
     </>
    

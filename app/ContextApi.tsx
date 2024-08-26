@@ -82,6 +82,10 @@ interface AppContextType {
       }>
     >;
   };
+  deleteModalObject: {
+    openDeleteModal: boolean;
+    setOpenDeleteModal: React.Dispatch<React.SetStateAction<boolean>>;
+  };
 }
 
 const defaultState: AppContextType = {
@@ -137,6 +141,10 @@ const defaultState: AppContextType = {
       top: 0,
     },
     setDropDownPositions: () => {},
+  },
+  deleteModalObject: {
+    openDeleteModal: false,
+    setOpenDeleteModal: () => {},
   },
 };
 const AppContext = createContext<AppContextType>(defaultState);
@@ -203,8 +211,10 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({
     left: 0,
     top: 0,
   });
+  //
   const [openDropdown, setOpenDropdown] = useState(false);
-
+  // delete modal state
+  const [openDeleteModal, setOpenDeleteModal] = useState(false);
   //simulate the fetch using set time out
   useEffect(() => {
     function fetchAllProjects() {
@@ -272,6 +282,10 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({
           setOpenDropdown,
           dropDownPositions,
           setDropDownPositions,
+        },
+        deleteModalObject: {
+          openDeleteModal,
+          setOpenDeleteModal,
         },
       }}
     >
