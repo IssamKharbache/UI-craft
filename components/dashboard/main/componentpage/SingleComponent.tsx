@@ -2,13 +2,14 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import CodeIcon from "@mui/icons-material/Code";
 import PreviewIcon from "@mui/icons-material/Preview";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { LiveError, LivePreview, LiveProvider } from "react-live";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import { atelierCaveLight } from "react-syntax-highlighter/dist/esm/styles/hljs";
 import { AllprojectsData, Component, Project } from "@/localData";
 import { useAppContext } from "@/app/ContextApi";
-import { Checkbox } from "@mui/material";
+import { Checkbox, IconButton } from "@mui/material";
+import DropDown from "./DropDown";
 const SingleComponentPage = ({ component }: { component: Component }) => {
   const [tabMenu, setTabMenu] = useState([
     {
@@ -38,7 +39,10 @@ const SingleComponentPage = ({ component }: { component: Component }) => {
   const {
     selectedProjectObject: { selectedProject, setSelectedProject },
     allProjectsObject: { setAllProjects ,allProjects},
+    dropDownObject:{setOpenDropdown,openDropdown,dropDownPositions,setDropDownPositions}
   } = useAppContext();
+
+  const iconRef = useRef<HTMLDivElement>(null);
 
   const updateFavoriteState = () => {
     const newAllProjects = allProjects.map((project: Project) => {
@@ -67,9 +71,24 @@ const SingleComponentPage = ({ component }: { component: Component }) => {
     
     
   };
+ const openDropDown = (event: React.MouseEvent) => {
+  event.stopPropagation();
+  if(iconRef.current){
+    const rect = iconRef.current.getBoundingClientRect();
+    const top = rect.top;
+    const left = rect.left;
+    //open the dropdown
+    setOpenDropdown(true);
+    //set the positions
+    setDropDownPositions({
+    top:top,left:left
+    });
+  }
 
+ }
   return (
     <div className="flex flex-col gap-4 px-4 py-7 bg-red-100/80  m-4 rounded">
+      <DropDown />
       {/* title and favorited icon  */}
       <div className="flex gap-2 justify-between">
         <div className="flex items-center gap-2">
@@ -82,7 +101,12 @@ const SingleComponentPage = ({ component }: { component: Component }) => {
           ></Checkbox>
 
         </div>
-        <MoreVertIcon className="cursor-pointer" />
+      <div className="" onClick={openDropDown} ref={iconRef}>
+      <IconButton >
+           <MoreVertIcon  />
+        </IconButton>
+      </div>
+       
       </div>
       {/* preview and jsx */}
       <div className="flex gap-4 rounded-xl max-w-md">

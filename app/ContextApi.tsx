@@ -68,6 +68,20 @@ interface AppContextType {
     selectedProject: Project | null;
     setSelectedProject: React.Dispatch<React.SetStateAction<Project | null>>;
   };
+  dropDownObject: {
+    openDropdown: boolean;
+    setOpenDropdown: React.Dispatch<React.SetStateAction<boolean>>;
+    dropDownPositions: {
+      left: number;
+      top: number;
+    };
+    setDropDownPositions: React.Dispatch<
+      React.SetStateAction<{
+        left: number;
+        top: number;
+      }>
+    >;
+  };
 }
 
 const defaultState: AppContextType = {
@@ -114,6 +128,15 @@ const defaultState: AppContextType = {
   selectedProjectObject: {
     selectedProject: null,
     setSelectedProject: () => {},
+  },
+  dropDownObject: {
+    openDropdown: false,
+    setOpenDropdown: () => {},
+    dropDownPositions: {
+      left: 0,
+      top: 0,
+    },
+    setDropDownPositions: () => {},
   },
 };
 const AppContext = createContext<AppContextType>(defaultState);
@@ -173,8 +196,14 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({
   const [showComponentPage, setShowComponentPage] = useState(false);
   const [isMenuOpen, setMenuOpen] = useState(false);
 
-  //
+  //selected project state
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  //single component dropdown state
+  const [dropDownPositions, setDropDownPositions] = useState({
+    left: 0,
+    top: 0,
+  });
+  const [openDropdown, setOpenDropdown] = useState(false);
 
   //simulate the fetch using set time out
   useEffect(() => {
@@ -196,7 +225,7 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({
       setAllFavoriteComponents(favoriteComponents);
       setIsFavoriteComponentsLoading(false);
     }
-  }, [allProjects,selectedProject]);
+  }, [allProjects, selectedProject]);
 
   //update local storage when ever sidebar states changes
 
@@ -237,6 +266,12 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({
         selectedProjectObject: {
           selectedProject,
           setSelectedProject,
+        },
+        dropDownObject: {
+          openDropdown,
+          setOpenDropdown,
+          dropDownPositions,
+          setDropDownPositions,
         },
       }}
     >
