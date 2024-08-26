@@ -3,11 +3,12 @@ import { useAppContext } from "@/app/ContextApi";
 import SingleComponentPage from "./SingleComponent";
 import AddIcon from '@mui/icons-material/Add';
 import { TextToIcon } from "@/utils/TextToIcon";
+import { SoftLayer } from "../../ContentArea";
 
 const ComponentPage = () => {
   const {
-    showComponentPageObject: { setShowComponentPage, showComponentPage },
     selectedProjectObject: { selectedProject },
+    deleteModalObject:{openDeleteModal},
   } = useAppContext();
   if (selectedProject?.components.length === 0) {
     return (
@@ -26,8 +27,10 @@ const ComponentPage = () => {
       </div>
     );
   }
+ 
   return (
     <div className="flex flex-col gap-4 overflow-auto max-h-[830px]">
+      {openDeleteModal && <SoftLayer />}
       {selectedProject?.components.map((component, index) => (
         <div key={index}>
           <SingleComponentPage component={component} />

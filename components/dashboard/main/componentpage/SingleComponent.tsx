@@ -88,7 +88,6 @@ const SingleComponentPage = ({ component }: { component: Component }) => {
  }
   return (
     <div className="flex flex-col gap-4 px-4 py-7 bg-red-100/80  m-4 rounded">
-      <DropDown />
       {/* title and favorited icon  */}
       <div className="flex gap-2 justify-between">
         <div className="flex items-center gap-2">

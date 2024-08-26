@@ -11,7 +11,6 @@ const DropDown = () => {
     dropDownObject: { openDropdown, setOpenDropdown, dropDownPositions },
     deleteModalObject:{openDeleteModal,setOpenDeleteModal},
   } = useAppContext();
-  console.log(openDeleteModal);
   
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {

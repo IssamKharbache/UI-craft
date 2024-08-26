@@ -7,9 +7,12 @@ import { useAppContext } from '@/app/ContextApi';
 import ComponentPage from './main/componentpage/ComponentPage';
 import MainNavBar  from './NavBar';
 import NavBar from './main/componentpage/NavBar';
+import { set } from 'mongoose';
 
 const ContentArea = () => {
-    const {addProjectModelObject:{addModelOpen},iconModalObject:{iconModalOpen},showComponentPageObject:{showComponentPage},deleteModalObject:{openDeleteModal}} = useAppContext();
+    const {addProjectModelObject:{addModelOpen},iconModalObject:{iconModalOpen},showComponentPageObject:{showComponentPage},deleteModalObject:{openDeleteModal,setOpenDeleteModal}} = useAppContext();
+   
+    
     if(showComponentPage){
       return (
         <>
@@ -35,7 +38,12 @@ const ContentArea = () => {
 export default ContentArea
 
 export const SoftLayer = () =>{
+  const {deleteModalObject:{openDeleteModal,setOpenDeleteModal},addProjectModelObject:{setAddModelOpen}} = useAppContext();
     return (
-      <div className="w-full h-full fixed top-0 right-0 bg-black opacity-50"></div>
+      <div onClick={()=>{
+  setOpenDeleteModal(false);
+  setAddModelOpen(false);
+
+      }} className="w-full h-full fixed top-0 right-0 bg-black opacity-50"></div>
     )
   }
