@@ -6,10 +6,9 @@ import { useRef, useState } from "react";
 import { LiveError, LivePreview, LiveProvider } from "react-live";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import { atelierCaveLight } from "react-syntax-highlighter/dist/esm/styles/hljs";
-import { AllprojectsData, Component, Project } from "@/localData";
+import {Component, Project } from "@/localData";
 import { useAppContext } from "@/app/ContextApi";
 import { Checkbox, IconButton } from "@mui/material";
-import DropDown from "./DropDown";
 const SingleComponentPage = ({ component }: { component: Component }) => {
   const [tabMenu, setTabMenu] = useState([
     {
@@ -84,7 +83,7 @@ const SingleComponentPage = ({ component }: { component: Component }) => {
     top:top,left:left
     });
   }
-
+ 
  }
   return (
     <div className="flex flex-col gap-4 px-4 py-7 bg-red-100/80  m-4 rounded">

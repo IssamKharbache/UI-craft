@@ -4,29 +4,38 @@ import { useAppContext } from "@/app/ContextApi";
 import { useEffect, useRef } from "react";
 import AppRegistrationIcon from "@mui/icons-material/AppRegistration";
 import { ContentCopy, DeleteOutlineOutlined } from "@mui/icons-material";
+import { Component, Project } from "@/localData";
+import { toast } from "sonner";
 
 const DropDown = () => {
   const dropDownRef = useRef<HTMLDivElement>(null);
   const {
     dropDownObject: { openDropdown, setOpenDropdown, dropDownPositions },
-    deleteModalObject:{openDeleteModal,setOpenDeleteModal},
+    deleteModalObject: { openDeleteModal, setOpenDeleteModal },
+    selectedComponentObject:{selectedComponent,setSelectedComponent}
   } = useAppContext();
-  
+  //close the dropdown when the delete modal is open and the user clicks outside the dropdown
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (
         dropDownRef.current &&
-        !dropDownRef.current.contains(event.target as Node)
+        !dropDownRef.current.contains(event.target as Node) &&
+        openDeleteModal
       ) {
         setOpenDropdown(false);
+        if(openDeleteModal){
+          setSelectedComponent(null);
+        }
       }
     }
     function handleScroll() {
       setOpenDropdown(false);
+      setSelectedComponent(null)
     }
     function handleWheel(event: WheelEvent) {
       if (event.deltaY !== 0) {
         setOpenDropdown(false);
+        setSelectedComponent(null);
       }
     }
     document.addEventListener("mousedown", handleClickOutside);
@@ -39,6 +48,11 @@ const DropDown = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, [setOpenDropdown]);
+  //delete componnent function
+  const deleteComponent = () => {
+    setOpenDeleteModal(true);
+    setOpenDropdown(false);
+  };
   return (
     <div
       ref={dropDownRef}
@@ -62,7 +76,10 @@ const DropDown = () => {
       {/* devider line */}
       <hr className="border-t border-slate-200" />
       {/* delete icon  */}
-      <div onClick={()=>setOpenDeleteModal(true)} className="flex gap-1 items-center text-slate-600 cursor-pointer hover:text-red-400">
+      <div
+        onClick={deleteComponent}
+        className="flex gap-1 items-center text-slate-600 cursor-pointer hover:text-red-400"
+      >
         <DeleteOutlineOutlined sx={{ fontSize: 21 }} className="text" />
         <span className="text-[14px]">Delete</span>
       </div>
