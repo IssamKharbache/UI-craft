@@ -14,7 +14,6 @@ const DeleteModal = () => {
     selectedComponentObject:{selectedComponent,setSelectedComponent},
   } = useAppContext();
   const deleteComponent = () => {
-
     try {
       if (selectedProject) {
         const updatedSelectedProject = {
