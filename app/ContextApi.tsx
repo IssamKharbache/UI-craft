@@ -233,6 +233,13 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({
   useEffect(() => {
     function fetchAllProjects() {
       setTimeout(() => {
+        AllprojectsData.forEach((project) => {
+          project.components.sort((a, b) => {
+            return (
+              new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+            );
+          });
+        });
         setAllProjects(AllprojectsData);
         setIsLoading(false);
       }, 3000);

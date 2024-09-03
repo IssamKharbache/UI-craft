@@ -1,3 +1,4 @@
+import { v4 as uuidv4 } from "uuid";
 export interface Component {
   _id: string;
   name: string;
@@ -18,14 +19,14 @@ export interface Project {
 
 export const AllprojectsData: Project[] = [
   {
-    _id: "1",
+    _id: uuidv4(),
     nextAuthId: "",
     name: "Forms",
     icon: "Category icon",
     createdAt: "2022-01-01T00:00:00.000Z",
     components: [
       {
-      _id: "12",
+        _id: uuidv4(),
         name: "Form 1",
         projectName: "Forms",
         code: "<div className='bg-red-100 m-4 w-1/2 px-4 py-4 rounded'>\n        <h1 className='text-lg font-bold text-red-400'>Hello, Tailwind</h1>\n        <p className='text-sm  text-slate-500'>Edit this code to see live changes</p>\n    </div>",
@@ -33,7 +34,7 @@ export const AllprojectsData: Project[] = [
         createdAt: "2022-01-01T00:00:00.000Z",
       },
       {
-        _id: "12",
+        _id: uuidv4(),
         name: "Form 2",
         projectName: "Forms",
         code: "",
@@ -41,7 +42,7 @@ export const AllprojectsData: Project[] = [
         createdAt: "2022-01-01T00:00:00.000Z",
       },
       {
-        _id: "14",
+        _id: uuidv4(),
         name: "Form 3",
         projectName: "Forms",
         code: "",
@@ -51,14 +52,14 @@ export const AllprojectsData: Project[] = [
     ],
   },
   {
-    _id: "2",
+    _id: uuidv4(),
     nextAuthId: "",
     name: "Buttons",
     icon: "RectangleIcon",
     createdAt: "2022-01-01T00:00:00.000Z",
     components: [
       {
-        _id: "21",
+        _id: uuidv4(),
         name: "Button 1",
         projectName: "Buttons",
         code: "<button className='bg-red-300 hover:bg-red-400 transition m-4 w-1/2 px-4 py-4 rounded'>Hover</button>",
@@ -66,7 +67,7 @@ export const AllprojectsData: Project[] = [
         createdAt: "2022-01-01T00:00:00.000Z",
       },
       {
-        _id: "23",
+        _id: uuidv4(),
         name: "Button 2 ",
         projectName: "Buttons",
         code: "<button className='bg-red-100 m-4 w-1/2 px-4 py-4 rounded'>\n        <h1 className='text-lg font-bold text-red-400'>Button</h1>\n        <p className='text-sm  text-slate-500'>Edit this code to see live changes</p>\n    </button>",
@@ -74,7 +75,7 @@ export const AllprojectsData: Project[] = [
         createdAt: "2022-01-01T00:00:00.000Z",
       },
       {
-        _id: "24",
+        _id: uuidv4(),
         name: "Button 3",
         projectName: "Buttons",
         code: "<button className='bg-red-100 m-4 w-1/2 px-4 py-4 rounded'>\n        <h1 className='text-lg font-bold text-red-400'>Button</h1>\n        <p className='text-sm  text-slate-500'>Edit this code to see live changes</p>\n    </button>",

@@ -4,7 +4,8 @@ import { useAppContext } from "@/app/ContextApi";
 import { useEffect, useRef } from "react";
 import AppRegistrationIcon from "@mui/icons-material/AppRegistration";
 import { ContentCopy, DeleteOutlineOutlined } from "@mui/icons-material";
-import { Component, Project } from "@/localData";
+import { Component } from "@/localData";
+import { v4 as uuidv4 } from "uuid";
 import { toast } from "sonner";
 
 const DropDown = () => {
@@ -12,7 +13,9 @@ const DropDown = () => {
   const {
     dropDownObject: { openDropdown, setOpenDropdown, dropDownPositions },
     deleteModalObject: { openDeleteModal, setOpenDeleteModal },
-    selectedComponentObject:{selectedComponent,setSelectedComponent}
+    selectedComponentObject: { selectedComponent, setSelectedComponent },
+    selectedProjectObject: { selectedProject, setSelectedProject },
+    allProjectsObject: { allProjects, setAllProjects },
   } = useAppContext();
   //close the dropdown when the delete modal is open and the user clicks outside the dropdown
   useEffect(() => {
@@ -23,14 +26,14 @@ const DropDown = () => {
         openDeleteModal
       ) {
         setOpenDropdown(false);
-        if(openDeleteModal){
+        if (openDeleteModal) {
           setSelectedComponent(null);
         }
       }
     }
     function handleScroll() {
       setOpenDropdown(false);
-      setSelectedComponent(null)
+      setSelectedComponent(null);
     }
     function handleWheel(event: WheelEvent) {
       if (event.deltaY !== 0) {
@@ -53,6 +56,48 @@ const DropDown = () => {
     setOpenDeleteModal(true);
     setOpenDropdown(false);
   };
+  //duplicate component function
+  const duplicateComponent = () => {
+   
+    if (selectedComponent && selectedProject) {
+      try {
+        const newComponentObject: Component = {
+          ...selectedComponent,
+          _id: uuidv4(),
+          name: `${selectedComponent.name}_copy`,
+          createdAt: new Date().toISOString(),
+        };
+        // add the new component to the project
+        const updateSelectedProject = {
+          ...selectedProject,
+          components: [...selectedProject.components, newComponentObject],
+        };
+        // sort the components by createdAt
+        updateSelectedProject.components.sort((a, b) => {
+          return (
+            new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+          );
+        });
+        setSelectedProject(updateSelectedProject);
+        // add a copy of selected component to the allProjects
+        const updateAllProjects = allProjects.map((project) => {
+          if (project._id === selectedProject._id) {
+            return updateSelectedProject;
+          }
+          return project;
+        });
+        setAllProjects(updateAllProjects);
+        toast.success("Component duplicated successfully", {
+          position: "top-center",
+        });
+      } catch (error) {
+        toast.error("Something went wrong, Try again", {
+          position: "top-center",
+        });
+      }
+    }
+    setOpenDropdown(false);
+  };
   return (
     <div
       ref={dropDownRef}
@@ -69,9 +114,12 @@ const DropDown = () => {
         <span className="text-[14px]">Edit</span>
       </div>
       {/* copy icon */}
-      <div className="flex gap-1 items-center text-slate-600 cursor-pointer hover:text-red-400">
+      <div
+        onClick={duplicateComponent}
+        className="flex gap-1 items-center text-slate-600 cursor-pointer hover:text-red-400"
+      >
         <ContentCopy sx={{ fontSize: 21 }} className="text" />
-        <span className="text-[14px]">Copy code</span>
+        <span className="text-[14px]">Duplicate</span>
       </div>
       {/* devider line */}
       <hr className="border-t border-slate-200" />
