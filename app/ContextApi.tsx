@@ -92,6 +92,10 @@ interface AppContextType {
       React.SetStateAction<Component | null>
     >;
   };
+  editorObject: {
+    openEditorModal: boolean;
+    setOpenEditorModal: React.Dispatch<React.SetStateAction<boolean>>;
+  };
 }
 
 const defaultState: AppContextType = {
@@ -155,6 +159,10 @@ const defaultState: AppContextType = {
   selectedComponentObject: {
     selectedComponent: null,
     setSelectedComponent: () => {},
+  },
+  editorObject: {
+    openEditorModal: false,
+    setOpenEditorModal: () => {},
   },
 };
 const AppContext = createContext<AppContextType>(defaultState);
@@ -229,6 +237,8 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({
   const [selectedComponent, setSelectedComponent] = useState<Component | null>(
     null
   );
+  //editor modal state
+  const [openEditorModal, setOpenEditorModal] = useState(false);
   //simulate the fetch using set time out
   useEffect(() => {
     function fetchAllProjects() {
@@ -260,9 +270,9 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({
 
   //update local storage when ever sidebar states changes
 
-  // useEffect(() => {
-  //   localStorage.setItem("openedSideBar", JSON.stringify(isOpen));
-  // }, [isOpen]);
+  useEffect(() => {
+    localStorage.setItem("openedSideBar", JSON.stringify(isOpen));
+  }, [isOpen]);
 
   return (
     <AppContext.Provider
@@ -311,6 +321,10 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({
         selectedComponentObject: {
           selectedComponent,
           setSelectedComponent,
+        },
+        editorObject: {
+          openEditorModal,
+          setOpenEditorModal,
         },
       }}
     >

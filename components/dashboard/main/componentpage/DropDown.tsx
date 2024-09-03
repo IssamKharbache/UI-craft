@@ -16,6 +16,7 @@ const DropDown = () => {
     selectedComponentObject: { selectedComponent, setSelectedComponent },
     selectedProjectObject: { selectedProject, setSelectedProject },
     allProjectsObject: { allProjects, setAllProjects },
+    editorObject:{openEditorModal,setOpenEditorModal}
   } = useAppContext();
   //close the dropdown when the delete modal is open and the user clicks outside the dropdown
   useEffect(() => {
@@ -98,6 +99,11 @@ const DropDown = () => {
     }
     setOpenDropdown(false);
   };
+
+  //edit function 
+  const editComponent = () => {
+setOpenEditorModal(true);
+  }
   return (
     <div
       ref={dropDownRef}
@@ -109,7 +115,7 @@ const DropDown = () => {
       className="bg-white z-50 px-5 border border-slate-50 fixed py-4 w-[160px] select-none  shadow-md flex flex-col gap-5"
     >
       {/* edit icon */}
-      <div className="flex gap-1 items-center text-slate-600 cursor-pointer hover:text-red-400">
+      <div onClick={editComponent} className="flex gap-1 items-center text-slate-600 cursor-pointer hover:text-red-400">
         <AppRegistrationIcon sx={{ fontSize: 21 }} className="text" />
         <span className="text-[14px]">Edit</span>
       </div>
