@@ -13,6 +13,7 @@ const ContentArea = () => {
     addProjectModelObject: { addModelOpen },
     showComponentPageObject: { showComponentPage },
     deleteModalObject: { openDeleteModal },
+    editorObject:{openEditorModal}
   } = useAppContext();
 
   if (showComponentPage) {
@@ -30,7 +31,7 @@ const ContentArea = () => {
         <Cards />
         <AllProjects />
         <FavoriteComponents />
-        {(addModelOpen || openDeleteModal) && <SoftLayer />}
+        {(addModelOpen || openDeleteModal ) && <SoftLayer />}
       </div>
     </>
   );

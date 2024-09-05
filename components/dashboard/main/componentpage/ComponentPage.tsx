@@ -9,6 +9,7 @@ const ComponentPage = () => {
   const {
     selectedProjectObject: { selectedProject },
     deleteModalObject:{openDeleteModal},
+    editorObject:{openEditorModal}
   } = useAppContext();
   if (selectedProject?.components.length === 0) {
     return (
@@ -30,7 +31,7 @@ const ComponentPage = () => {
  
   return (
     <div className="flex flex-col gap-4 overflow-auto max-h-[830px]">
-      {openDeleteModal && <SoftLayer />}
+      {openDeleteModal ||openEditorModal   && <SoftLayer />}
       {selectedProject?.components.map((component, index) => (
         <div key={index}>
           <SingleComponentPage component={component} />

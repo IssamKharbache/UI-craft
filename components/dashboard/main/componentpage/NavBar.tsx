@@ -10,7 +10,7 @@ import LogoutButton from "@/components/buttons/LogoutButton";
 
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const {selectedProjectObject:{selectedProject}} = useAppContext();
+  const {selectedProjectObject:{selectedProject},editorObject:{setOpenEditorModal}} = useAppContext();
  
   return (
     <div className="flex items-center  justify-between   px-7 mb-4 h-16">
@@ -20,7 +20,7 @@ const NavBar = () => {
       <SearchInput />
       {/* add component button */}
       {selectedProject?.components.length !== 0 && (
-      <button className="flex items-center gap-2 bg-primary text-white px-4 py-2 rounded-md hover:bg-primary-hover transition">
+      <button onClick={ ()=> setOpenEditorModal(true)} className="flex items-center gap-2 bg-primary text-white px-4 py-2 rounded-md hover:bg-primary-hover transition">
         <PiPlusCircleDuotone size={25} />
         <span className="hidden md:block">Component</span>
       </button>

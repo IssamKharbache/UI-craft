@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import AceEditor from "react-ace";
 import prettier from "prettier/standalone";
 import estreePlugin from "prettier/plugins/estree.js";
@@ -14,20 +14,168 @@ import { Checkbox } from "@mui/material";
 
 import { FaSave } from "react-icons/fa";
 import { LiveError, LivePreview, LiveProvider } from "react-live";
+import { toast } from "sonner";
+import { Component } from "@/localData";
+
+import { v4 as uuidv4 } from "uuid";
+import { FaRegCopy } from "react-icons/fa";
+import { MdOutlineLibraryAddCheck } from "react-icons/md";
 
 const ComponentEditor = () => {
+  //
+  const [copySuccess, setCopySuccess] = useState(false);
   const [code, setCode] = useState(`
         <div>
         <h1 className="text-red-400">Default Component</h1>
         </div>
         `);
-  //
+  //states
+
+  const [inputName, setInputName] = useState<string>("");
+  const inputRef = useRef<HTMLInputElement>(null);
   const aceEditor = useRef<AceEditor | null>(null);
   //
   const {
+    selectedProjectObject: { selectedProject, setSelectedProject },
+    selectedComponentObject: { selectedComponent, setSelectedComponent },
     editorObject: { openEditorModal, setOpenEditorModal },
+    allProjectsObject: { allProjects, setAllProjects },
   } = useAppContext();
-  const handleChange = () => {};
+  //format code function
+  const formatCode = async (codeToFormat: string) => {
+    try {
+      const formattedCode = await prettier.format(codeToFormat, {
+        parser: "babel",
+        plugins: [estreePlugin],
+      });
+      setCode(formattedCode);
+    } catch (error) {
+      console.error("Error formatting code:", error);
+    }
+  };
+  const saveComponent = () => {
+    //check if the project name not empty
+    if (inputName.trim() === "") {
+      toast.error("Please enter a component name", { position: "top-center" });
+      inputRef.current?.focus();
+      return;
+    }
+    if (code.trim() === "") {
+      toast.error("Please enter the component code", {
+        position: "top-center",
+      });
+      return;
+    }
+    if (!selectedProject) {
+      toast.error("No project selected", { position: "top-center" });
+      return;
+    }
+    if (!selectedComponent) {
+      //creating a new component
+      const newComponent: Component = {
+        _id: uuidv4(),
+        name: inputName,
+        code: code,
+        isFavorite: false,
+        projectName: selectedProject.name,
+        createdAt: new Date().toISOString(),
+      };
+
+      //check if the component name already exist
+      if (
+        selectedProject.components.some(
+          (component) =>
+            component.name.toLowerCase() === inputName.toLowerCase()
+        )
+      ) {
+        toast.error("Component name already exist, try another one", {
+          position: "top-center",
+        });
+        inputRef.current?.focus();
+        return;
+      }
+      addNewComponent(newComponent);
+      setSelectedComponent(newComponent);
+      toast.success("Component created successfully", {
+        position: "top-center",
+      });
+      formatCode(newComponent.code);
+    } else {
+      //updating existing component
+      const updatedComponent: Component = {
+        ...selectedComponent,
+        name: inputName,
+        code: code,
+      };
+      //check if the name conflicts with other components (excluding the current one)
+      if (
+        selectedProject.components.some(
+          (component) =>
+            component.name.toLowerCase() === inputName.toLowerCase() &&
+            component._id !== selectedComponent._id
+        )
+      ) {
+        toast.error("Component name already exist, try another one", {
+          position: "top-center",
+        });
+        inputRef.current?.focus();
+        return;
+      }
+      updateExistingComponent(updatedComponent);
+      setSelectedComponent(updatedComponent);
+      toast.success("Component updated successfully", {
+        position: "top-center",
+      });
+    }
+  };
+  //add new component function
+  const addNewComponent = (newComponent: Component) => {
+    if (selectedProject && allProjects) {
+      const updatedProject = {
+        ...selectedProject,
+        components: [...selectedProject.components, newComponent],
+      };
+      const updatedAllProjects = allProjects.map((project) =>
+        project._id === selectedProject._id ? updatedProject : project
+      );
+      setSelectedProject(updatedProject);
+      setAllProjects(updatedAllProjects);
+    }
+  };
+  //update existing component function
+  const updateExistingComponent = (updatedComponent: Component) => {
+    if (selectedProject && allProjects) {
+      const updatedComponents = selectedProject.components.map((component) =>
+        component._id === updatedComponent._id ? updatedComponent : component
+      );
+
+      const updatedProject = {
+        ...selectedProject,
+        components: updatedComponents,
+      };
+      const updatedAllProjects = allProjects.map((project) =>
+        project._id === selectedProject._id ? updatedProject : project
+      );
+      setSelectedProject(updatedProject);
+      setAllProjects(updatedAllProjects);
+    }
+    console.log(updatedComponent);
+  };
+  //copy code
+  const copyCode = () => {
+    setCopySuccess(true);
+    toast.success("Code copied successfully", { position: "top-center" });
+    navigator.clipboard.writeText(code);
+    setTimeout(() => {
+      setCopySuccess(false);
+    }, 4000);
+  };
+  const handleChange = (newValue: string) => {
+    setCode(newValue);
+  };
+  useEffect(() => {
+    formatCode(code);
+  }, []);
   return (
     <div
       style={{ display: openEditorModal ? "flex" : "none" }}
@@ -69,8 +217,10 @@ const ComponentEditor = () => {
           {/* input */}
           <div className="flex gap-3">
             <input
+              ref={inputRef}
+              onChange={(e) => setInputName(e.target.value)}
               placeholder="Enter Component name"
-              className="w-full border-2 border-red-200 rounded-lg px-4 py-2"
+              className="w-full border-2 border-red-200 rounded-lg px-4 py-2 focus:outline-none"
             />
           </div>
         </div>
@@ -78,11 +228,31 @@ const ComponentEditor = () => {
         <div className="flex flex-col gap-2 pt-6 px-8  ">
           <div className="flex justify-between">
             {/* input label */}
-            <span className="flex gap-1 items-center text-[13px]">
-              <Code className="text-[15px] font-bold" />
-              <span>Jsx code</span>
+            <span className="flex gap-8 items-center">
+              <div className="flex gap-1 items-center text-[13px]">
+                <Code className="text-[15px] font-bold" />
+                <span>Jsx code</span>
+              </div>
+              {/* copy code  */}
+              {!copySuccess ? (
+                <div
+                  onClick={copyCode}
+                  className="flex items-center gap-1 text-gray-400 hover:text-gray-700 cursor-pointer transition"
+                >
+                  <span className=" text-sm">Copy code</span>
+                  <FaRegCopy />
+                </div>
+              ) : (
+                <div className="flex items-center gap-1 text-gray-400 transition">
+                  <span className="text-sm">Code copied</span>
+                  <MdOutlineLibraryAddCheck />
+                </div>
+              )}
             </span>
-            <button className="bg-red-200 hover:bg-red-300/80 transition p-3 rounded-full flex items-center justify-centers">
+            <button
+              onClick={saveComponent}
+              className="bg-red-200 hover:bg-red-300/80 transition p-3 rounded-full flex items-center justify-centers"
+            >
               <FaSave className="size-4" />
             </button>
           </div>
@@ -90,7 +260,7 @@ const ComponentEditor = () => {
             <AceEditor
               ref={aceEditor}
               mode="jsx"
-              theme=""
+              theme="monokai"
               name="jsxEditor"
               value={code}
               editorProps={{ $blockScrolling: true }}

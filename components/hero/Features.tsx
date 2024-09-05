@@ -12,7 +12,7 @@ const features = [
   },
   {
     id: 2,
-    name: "Resusable Component",
+    name: "Reusable Component",
     icon: LuComponent,
     description:
       "Create and edit your REACT components directly within our editor.Write JSX code with syntax highlighting and instant previews",
