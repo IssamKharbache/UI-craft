@@ -35,19 +35,17 @@ const FavoriteComponents = () => {
         <span className="max-sm:hidden">Project</span>
         <span>Actions</span>
       </div>
-      {
-        isFavoriteComponentsLoading && (
-          <>
+      {isFavoriteComponentsLoading && (
+        <>
           <LoadingFavoriteComponents />
           <LoadingFavoriteComponents />
           <LoadingFavoriteComponents />
-          </>
-        )
-      }
+        </>
+      )}
       {/* components */}
       <div className="px-4 flex flex-col gap-1 mt-1">
         {!isFavoriteComponentsLoading && allFavoriteComponents.length === 0 ? (
-         <NoFavoriteComponents />
+          <NoFavoriteComponents />
         ) : (
           allFavoriteComponents.map((favoriteComponent, index) => (
             <SingleFavoriteComponent
@@ -56,7 +54,6 @@ const FavoriteComponents = () => {
             />
           ))
         )}
-        
       </div>
     </div>
   );
@@ -69,10 +66,21 @@ const SingleFavoriteComponent = ({
 }: {
   favoriteComponent: Component;
 }) => {
+  const {
+    editorObject: { setOpenEditorModal },
+    selectedComponentObject: { setSelectedComponent },
+  } = useAppContext();
+  const openComponent = () => {
+    setSelectedComponent(favoriteComponent);
+    setOpenEditorModal(true);
+  };
   return (
     <div className="grid grid-cols-4 text-sm items-center rounded-lg p-2 max-sm:grid-cols-2">
       {/* name */}
-      <span className="hover:text-red-400 cursor-pointer">
+      <span
+        onClick={openComponent}
+        className="hover:text-red-400 cursor-pointer"
+      >
         {favoriteComponent.name}
       </span>
       {/* data */}
@@ -111,7 +119,6 @@ const NoFavoriteComponents = () => {
   );
 };
 
-
 const LoadingFavoriteComponents = () => {
   return (
     <div className="animate-pulse grid grid-cols-4 text-sm items-center rounded-lg p-2 max-sm:grid-cols-2 ">
@@ -124,4 +131,4 @@ const LoadingFavoriteComponents = () => {
       </div>
     </div>
   );
-}
+};
