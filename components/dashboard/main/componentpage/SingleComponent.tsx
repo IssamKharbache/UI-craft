@@ -38,8 +38,8 @@ const SingleComponentPage = ({ component }: { component: Component }) => {
   const {
     selectedProjectObject: { selectedProject, setSelectedProject },
     allProjectsObject: { setAllProjects ,allProjects},
-    dropDownObject:{setOpenDropdown,openDropdown,dropDownPositions,setDropDownPositions},
-    selectedComponentObject:{selectedComponent,setSelectedComponent}
+    dropDownObject:{setOpenDropdown,setDropDownPositions},
+    selectedComponentObject:{setSelectedComponent}
   } = useAppContext();
 
   const iconRef = useRef<HTMLDivElement>(null);
@@ -73,7 +73,6 @@ const SingleComponentPage = ({ component }: { component: Component }) => {
   };
  const openDropDown = (event: React.MouseEvent) => {
   setSelectedComponent(component);
-   
   event.stopPropagation();
   if(iconRef.current){
     const rect = iconRef.current.getBoundingClientRect();

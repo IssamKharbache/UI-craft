@@ -24,23 +24,18 @@ import { MdOutlineLibraryAddCheck } from "react-icons/md";
 const ComponentEditor = () => {
   //
   const [copySuccess, setCopySuccess] = useState(false);
-  const [code, setCode] = useState(`
-        <div>
-        <h1 className="text-red-400">Default Component</h1>
-        </div>
-        `);
-  //states
 
-  const [inputName, setInputName] = useState<string>("");
+  //states
   const inputRef = useRef<HTMLInputElement>(null);
   const aceEditor = useRef<AceEditor | null>(null);
   //
   const {
     selectedProjectObject: { selectedProject, setSelectedProject },
     selectedComponentObject: { selectedComponent, setSelectedComponent },
-    editorObject: { openEditorModal, setOpenEditorModal },
+    editorObject: { openEditorModal, setOpenEditorModal,code,setCode,inputName,setInputName },
     allProjectsObject: { allProjects, setAllProjects },
   } = useAppContext();
+
   //format code function
   const formatCode = async (codeToFormat: string) => {
     try {
@@ -55,7 +50,7 @@ const ComponentEditor = () => {
   };
   const saveComponent = () => {
     //check if the project name not empty
-    if (inputName.trim() === "") {
+    if (inputName.trim() === "" && !selectedComponent) {
       toast.error("Please enter a component name", { position: "top-center" });
       inputRef.current?.focus();
       return;
@@ -127,6 +122,7 @@ const ComponentEditor = () => {
         position: "top-center",
       });
     }
+  setOpenEditorModal(false);
   };
   //add new component function
   const addNewComponent = (newComponent: Component) => {
@@ -159,7 +155,8 @@ const ComponentEditor = () => {
       setSelectedProject(updatedProject);
       setAllProjects(updatedAllProjects);
     }
-    console.log(updatedComponent);
+   
+    
   };
   //copy code
   const copyCode = () => {
@@ -176,6 +173,11 @@ const ComponentEditor = () => {
   useEffect(() => {
     formatCode(code);
   }, []);
+  useEffect(() => { 
+    setCode(selectedComponent ? selectedComponent.code : code);
+    setInputName(selectedComponent ? selectedComponent.name : inputName);
+  }, [selectedComponent]);
+  
   return (
     <div
       style={{ display: openEditorModal ? "flex" : "none" }}
@@ -218,6 +220,7 @@ const ComponentEditor = () => {
           <div className="flex gap-3">
             <input
               ref={inputRef}
+              value={inputName}
               onChange={(e) => setInputName(e.target.value)}
               placeholder="Enter Component name"
               className="w-full border-2 border-red-200 rounded-lg px-4 py-2 focus:outline-none"
@@ -262,7 +265,7 @@ const ComponentEditor = () => {
               mode="jsx"
               theme="monokai"
               name="jsxEditor"
-              value={code}
+              value={selectedComponent ? selectedComponent.code : code}
               editorProps={{ $blockScrolling: true }}
               onChange={handleChange}
               setOptions={{

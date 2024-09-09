@@ -10,8 +10,12 @@ import LogoutButton from "@/components/buttons/LogoutButton";
 
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const {selectedProjectObject:{selectedProject},editorObject:{setOpenEditorModal}} = useAppContext();
- 
+  const {
+    selectedProjectObject: { selectedProject },
+    editorObject: { setOpenEditorModal, setInputName, setCode },
+    selectedComponentObject: { setSelectedComponent, selectedComponent },
+  } = useAppContext();
+
   return (
     <div className="flex items-center  justify-between   px-7 mb-4 h-16">
       {/* back button and name */}
@@ -20,10 +24,20 @@ const NavBar = () => {
       <SearchInput />
       {/* add component button */}
       {selectedProject?.components.length !== 0 && (
-      <button onClick={ ()=> setOpenEditorModal(true)} className="flex items-center gap-2 bg-primary text-white px-4 py-2 rounded-md hover:bg-primary-hover transition">
-        <PiPlusCircleDuotone size={25} />
-        <span className="hidden md:block">Component</span>
-      </button>
+        <button
+          onClick={() => {
+            setOpenEditorModal(true);
+            setSelectedComponent(null);
+            setCode(` <div>
+    <h1 className="text-red-400">Default Component</h1>
+    </div>`);
+            setInputName("");
+          }}
+          className="flex items-center gap-2 bg-primary text-white px-4 py-2 rounded-md hover:bg-primary-hover transition"
+        >
+          <PiPlusCircleDuotone size={25} />
+          <span className="hidden md:block">Component</span>
+        </button>
       )}
 
       <div className="block md:hidden">
@@ -60,7 +74,6 @@ export default NavBar;
 
 //search component
 const SearchInput = () => {
-  
   return (
     <div className="hidden md:block">
       <input
@@ -73,7 +86,6 @@ const SearchInput = () => {
 };
 //left side component
 const LeftSide = () => {
-  
   const {
     showComponentPageObject: { setShowComponentPage, showComponentPage },
     selectedProjectObject: { selectedProject },
@@ -89,8 +101,12 @@ const LeftSide = () => {
       </button>
 
       <div className="flex flex-col">
-        <span className="font-bold text-md md:text-xl">{selectedProject?.name}</span>
-        <span className="text-slate-400 text-sm ">{selectedProject?.components.length} components</span>
+        <span className="font-bold text-md md:text-xl">
+          {selectedProject?.name}
+        </span>
+        <span className="text-slate-400 text-sm ">
+          {selectedProject?.components.length} components
+        </span>
       </div>
     </div>
   );

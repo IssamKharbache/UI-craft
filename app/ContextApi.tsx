@@ -95,6 +95,10 @@ interface AppContextType {
   editorObject: {
     openEditorModal: boolean;
     setOpenEditorModal: React.Dispatch<React.SetStateAction<boolean>>;
+    code: string;
+    setCode: React.Dispatch<React.SetStateAction<string>>;
+    inputName: string;
+    setInputName: React.Dispatch<React.SetStateAction<string>>;
   };
 }
 
@@ -163,6 +167,12 @@ const defaultState: AppContextType = {
   editorObject: {
     openEditorModal: false,
     setOpenEditorModal: () => {},
+    code: `<div>
+    <h1 className="text-red-400">Default Component</h1>
+    </div>`,
+    setCode: () => {},
+    inputName: "",
+    setInputName: () => {},
   },
 };
 const AppContext = createContext<AppContextType>(defaultState);
@@ -239,6 +249,11 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({
   );
   //editor modal state
   const [openEditorModal, setOpenEditorModal] = useState(false);
+  const [code, setCode] = useState(`
+    <div>
+    <h1 className="text-red-400">Default Component</h1>
+    </div>`);
+  const [inputName, setInputName] = useState<string>("");
   //simulate the fetch using set time out
   useEffect(() => {
     function fetchAllProjects() {
@@ -325,6 +340,10 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({
         editorObject: {
           openEditorModal,
           setOpenEditorModal,
+          code,
+          setCode,
+          inputName,
+          setInputName,
         },
       }}
     >
