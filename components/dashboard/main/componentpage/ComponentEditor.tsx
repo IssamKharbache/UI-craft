@@ -20,6 +20,7 @@ import { Component } from "@/localData";
 import { v4 as uuidv4 } from "uuid";
 import { FaRegCopy } from "react-icons/fa";
 import { MdOutlineLibraryAddCheck } from "react-icons/md";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 
 const ComponentEditor = () => {
   //
@@ -177,7 +178,31 @@ const ComponentEditor = () => {
     setCode(selectedComponent ? selectedComponent.code : code);
     setInputName(selectedComponent ? selectedComponent.name : inputName);
   }, [selectedComponent]);
-  
+  const updateTheFavoriteState = () =>{
+    if(selectedComponent !== null && allProjects !== null && selectedProject !== null){
+      const updatedComponent = {
+        ...selectedComponent,
+        isFavorite : !selectedComponent.isFavorite
+      }
+      //update the component array in the selected project
+      const updateComponents = selectedProject.components.map((component)=>
+      component._id === selectedComponent._id ? updatedComponent : component
+      )
+
+      const updatedSelectedProject = {
+        ...selectedProject,
+        components: updateComponents
+      }
+      const updatedAllProjects = allProjects.map((project)=>
+      project._id === selectedProject._id ? updatedSelectedProject : project
+      )
+      setSelectedComponent(updatedComponent);
+      setSelectedProject(updatedSelectedProject);
+      setAllProjects(updatedAllProjects);
+    }else{
+      console.log("Selected component,project or all projects is null");
+    }
+  }
   return (
     <div
       style={{ display: openEditorModal ? "flex" : "none" }}
@@ -213,7 +238,8 @@ const ComponentEditor = () => {
               <span>Component name</span>
             </span>
             <div className="">
-              <Checkbox icon={<FavoriteBorder />} sx={{ fontSize: 20 }} />
+              <Checkbox icon={<FavoriteIcon className={"text-gray-500"} />}
+            checkedIcon={<FavoriteIcon className={"text-red-500"} />} sx={{ fontSize: 20 }} checked={selectedComponent?.isFavorite} onChange={updateTheFavoriteState} />
             </div>
           </div>
           {/* input */}

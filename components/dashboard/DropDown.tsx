@@ -20,21 +20,21 @@ const DropDown = ({ showDropDown }: { showDropDown: boolean }) => {
       {/* links */}
       <div className="flex flex-col text-slate-500 text-sm gap-8  justify-center ml-8 mb-5 mt-8    w-full ">
         <div className="flex gap-4 items-center">
-        <div className="">
-        {image ? (
-            <Image
-              src={image}
-              width={250}
-              height={250}
-              alt="Avatar"
-              className="w-8 h-8 rounded-full"
-            />
-          ) : (
-            <div className="bg-red-200 rounded-full w-10 h-10 flex items-center justify-center">
-              <p className="font-bold uppercase">{getInitials(name)}</p>
-            </div>
-          )}
-        </div>
+          <div className="">
+            {image ? (
+              <Image
+                src={image}
+                width={250}
+                height={250}
+                alt="Avatar"
+                className="w-8 h-8 rounded-full"
+              />
+            ) : (
+              <div className="bg-red-200 rounded-full w-10 h-10 flex items-center justify-center">
+                <p className="font-bold uppercase">{getInitials(name)}</p>
+              </div>
+            )}
+          </div>
           <div className="flex flex-col">
             <h1 className="font-semibold text-slate-700 capitalize">{name}</h1>
             <p className="text-sm">{email}</p>
@@ -49,7 +49,7 @@ const DropDown = ({ showDropDown }: { showDropDown: boolean }) => {
         </Link>
         <button
           className="flex  items-center gap-4  text-sm hover:text-slate-700 transition-all "
-          onClick={()=>signOut()}
+          onClick={() => signOut()}
         >
           <BiLogOut />
           <span>Sign out</span>
