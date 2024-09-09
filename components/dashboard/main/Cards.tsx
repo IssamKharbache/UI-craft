@@ -4,26 +4,29 @@ import React from 'react'
 import { GoProjectRoadmap } from "react-icons/go";
 import { BiSolidCategory } from "react-icons/bi";
 import { IoHeartSharp } from "react-icons/io5";
+import { useAppContext } from '@/app/ContextApi';
 
+
+const Cards = () => {
+    const {allProjectsObject:{allProjects},favoritesComponentObject:{allFavoriteComponents}} = useAppContext();
 const data = [
     {
         name:"Projects created",
         icon :<GoProjectRoadmap size={25} className='text-red-400'/>,
-        number:3
+        number:allProjects.length
     },
     {
         name:"Components added",
         icon :<BiSolidCategory size={25} className='text-red-400'/>,
-        number:12
+        number:allProjects.map(project=>project.components.length).reduce((a,b)=>a+b,0)
     },
     {
         name:"Favorites components",
         icon :<IoHeartSharp size={25} className='text-red-400' />,
-        number:25
+        number:allFavoriteComponents.length
     },
 ]
 
-const Cards = () => {
   return (
     <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3
     '>

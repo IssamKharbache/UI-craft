@@ -69,11 +69,40 @@ const SingleFavoriteComponent = ({
   const {
     editorObject: { setOpenEditorModal },
     selectedComponentObject: { setSelectedComponent },
+    allProjectsObject: { allProjects, setAllProjects },
+    selectedProjectObject: { selectedProject, setSelectedProject },
+    deleteModalObject:{openDeleteModal,setOpenDeleteModal}
   } = useAppContext();
   const openComponent = () => {
     setSelectedComponent(favoriteComponent);
     setOpenEditorModal(true);
+    const project = allProjects.find(
+      (project) =>
+        project.name.toLowerCase() ===
+        favoriteComponent.projectName.toLowerCase()
+    );
+
+    if (project) {
+      setSelectedProject(project);
+    } else {
+      console.log(`Project not found for component ${favoriteComponent.name}`);
+    }
   };
+  const deleteComponent = () => {
+    const project = allProjects.find(
+      (project) =>
+        project.name.toLowerCase() ===
+        favoriteComponent.projectName.toLowerCase()
+    );
+
+    if (project) {
+      setSelectedProject(project);
+    } else {
+      console.log(`Project not found for component ${favoriteComponent.name}`);
+    }
+    setSelectedComponent(favoriteComponent);
+    setOpenDeleteModal(true);
+  }
   return (
     <div className="grid grid-cols-4 text-sm items-center rounded-lg p-2 max-sm:grid-cols-2">
       {/* name */}
@@ -96,11 +125,11 @@ const SingleFavoriteComponent = ({
       {/* actions */}
       <div className="flex gap-2">
         {/* modify button */}
-        <div className="bg-slate-300 rounded-full w-7 h-7 flex items-center justify-center hover:bg-slate-400 cursor-pointer transition">
+        <div onClick={openComponent} className="bg-slate-300 rounded-full w-7 h-7 flex items-center justify-center hover:bg-slate-400 cursor-pointer transition">
           <CiEdit fontSize="large" />
         </div>
         {/* delete button */}
-        <div className="bg-primary rounded-full w-7 h-7 flex items-center justify-center hover:bg-primary-hover cursor-pointer transition">
+        <div onClick={deleteComponent} className="bg-primary rounded-full w-7 h-7 flex items-center justify-center hover:bg-primary-hover cursor-pointer transition">
           <TbTrash fontSize="large" />
         </div>
       </div>
