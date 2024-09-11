@@ -100,6 +100,10 @@ interface AppContextType {
     inputName: string;
     setInputName: React.Dispatch<React.SetStateAction<string>>;
   };
+  projectsModal :{
+    openProjectsModal:boolean;
+    setOpenProjectsModal:React.Dispatch<React.SetStateAction<boolean>>;
+  }
 }
 
 const defaultState: AppContextType = {
@@ -174,6 +178,10 @@ const defaultState: AppContextType = {
     inputName: "",
     setInputName: () => {},
   },
+  projectsModal:{
+    openProjectsModal:false,
+    setOpenProjectsModal:()=>{}
+  }
 };
 const AppContext = createContext<AppContextType>(defaultState);
 //create default state
@@ -192,8 +200,8 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({
     },
     {
       id: "3",
-      name: "categories",
-      href: "/categories",
+      name: "projects",
+      href: "/projects",
       icon: <TbCategory2 />,
       isSelected: false,
     },
@@ -254,6 +262,9 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({
     <h1 className="text-red-400">Default Component</h1>
     </div>`);
   const [inputName, setInputName] = useState<string>("");
+  //projects modal state
+  const [openProjectsModal,setOpenProjectsModal] = useState(false);
+
   //simulate the fetch using set time out
   useEffect(() => {
     function fetchAllProjects() {
@@ -345,6 +356,10 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({
           inputName,
           setInputName,
         },
+        projectsModal:{
+          openProjectsModal,
+          setOpenProjectsModal
+        }
       }}
     >
       {children}

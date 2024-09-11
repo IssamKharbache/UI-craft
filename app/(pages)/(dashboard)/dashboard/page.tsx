@@ -4,7 +4,6 @@ import AddProjectModal from '@/components/dashboard/main/projects/AddProjectModa
 import IconsModal from '@/components/dashboard/main/projects/IconsModal';
 import { useState } from 'react';
 import { IoIosAdd } from 'react-icons/io';
-import AcUnitIcon from '@mui/icons-material/AcUnit';
 import DeleteModal from '@/components/dashboard/main/componentpage/DeleteModal';
 import DropDown from '@/components/dashboard/main/componentpage/DropDown';
 import ComponentEditor from '@/components/dashboard/main/componentpage/ComponentEditor';

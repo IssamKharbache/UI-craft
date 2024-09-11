@@ -7,13 +7,15 @@ import { useAppContext } from "@/app/ContextApi";
 import ComponentPage from "./main/componentpage/ComponentPage";
 import MainNavBar from "./NavBar";
 import NavBar from "./main/componentpage/NavBar";
+import ProjectsModal from "./projects/ProjectsModal";
 
 const ContentArea = () => {
   const {
     addProjectModelObject: { addModelOpen },
     showComponentPageObject: { showComponentPage },
     deleteModalObject: { openDeleteModal },
-    editorObject:{openEditorModal}
+    editorObject:{openEditorModal},
+    projectsModal:{openProjectsModal}
   } = useAppContext();
 
   if (showComponentPage) {
@@ -31,7 +33,8 @@ const ContentArea = () => {
         <Cards />
         <AllProjects />
         <FavoriteComponents />
-        {(addModelOpen || openDeleteModal ) && <SoftLayer />}
+        <ProjectsModal />
+        {(addModelOpen || openDeleteModal || openProjectsModal) && <SoftLayer />}
       </div>
     </>
   );
@@ -43,12 +46,14 @@ export const SoftLayer = () => {
   const {
     deleteModalObject: { setOpenDeleteModal },
     addProjectModelObject: { setAddModelOpen },
+    projectsModal:{setOpenProjectsModal}
   } = useAppContext();
   return (
     <div
       onClick={() => {
         setOpenDeleteModal(false);
         setAddModelOpen(false);
+        setOpenProjectsModal(false);
       }}
       className="w-full h-full fixed top-0 right-0 bg-black opacity-50"
     ></div>
