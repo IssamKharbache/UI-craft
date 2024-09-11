@@ -198,15 +198,9 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({
       icon: <HiMiniHome />,
       isSelected: true,
     },
+   
     {
-      id: "3",
-      name: "projects",
-      href: "/projects",
-      icon: <TbCategory2 />,
-      isSelected: false,
-    },
-    {
-      id: "3",
+      id: "2",
       name: "favorites",
       href: "/favorites",
       icon: <IoIosHeart />,
@@ -220,9 +214,9 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({
     return storedValue !== null ? JSON.parse(storedValue) : true;
   });
   //
-  const [showSearchBar, setShowSeachBar] = useState(false);
+  const [showSearchBar, setShowSeachBar] = useState<boolean>(false);
   //
-  const [showResponsiveSearchBar, setShowResSeachBar] = useState(false);
+  const [showResponsiveSearchBar, setShowResSeachBar] = useState<boolean>(false);
   //projects state
   const [allProjects, setAllProjects] = useState<Project[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -233,12 +227,12 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({
     Component[]
   >([]);
   //add project state
-  const [addModelOpen, setAddModelOpen] = useState(false);
+  const [addModelOpen, setAddModelOpen] = useState<boolean>(false);
   //icon modal state
-  const [iconModalOpen, setIconModalOpen] = useState(false);
+  const [iconModalOpen, setIconModalOpen] = useState<boolean>(false);
   //component page state
-  const [showComponentPage, setShowComponentPage] = useState(false);
-  const [isMenuOpen, setMenuOpen] = useState(false);
+  const [showComponentPage, setShowComponentPage] = useState<boolean>(false);
+  const [isMenuOpen, setMenuOpen] = useState<boolean>(false);
 
   //selected project state
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
@@ -248,22 +242,22 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({
     top: 0,
   });
   //
-  const [openDropdown, setOpenDropdown] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState<boolean>(false);
   // delete modal state
-  const [openDeleteModal, setOpenDeleteModal] = useState(false);
+  const [openDeleteModal, setOpenDeleteModal] = useState<boolean>(false);
   //
   const [selectedComponent, setSelectedComponent] = useState<Component | null>(
     null
   );
   //editor modal state
-  const [openEditorModal, setOpenEditorModal] = useState(false);
+  const [openEditorModal, setOpenEditorModal] = useState<boolean>(false);
   const [code, setCode] = useState(`
     <div>
     <h1 className="text-red-400">Default Component</h1>
     </div>`);
   const [inputName, setInputName] = useState<string>("");
   //projects modal state
-  const [openProjectsModal,setOpenProjectsModal] = useState(false);
+  const [openProjectsModal,setOpenProjectsModal] = useState<boolean>(false);
 
   //simulate the fetch using set time out
   useEffect(() => {
