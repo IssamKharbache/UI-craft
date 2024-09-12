@@ -4,7 +4,6 @@ import { Component } from "@/localData";
 import { convertIsoToNormal } from "@/utils/convertIsoToNormal";
 
 import React from "react";
-import { CgEditFade } from "react-icons/cg";
 import { CiEdit } from "react-icons/ci";
 import { MdVisibility } from "react-icons/md";
 import { TbTrash } from "react-icons/tb";
@@ -16,7 +15,7 @@ const FavoriteComponents = () => {
       isFavoriteComponentsLoading,
     },
   } = useAppContext();
-
+  
   return (
     <div className="bg-white w-full p-8 rounded-lg mt-4">
       {/* header */}
@@ -44,7 +43,7 @@ const FavoriteComponents = () => {
       )}
       {/* components */}
       <div className="px-4 flex flex-col gap-1 mt-1">
-        {!isFavoriteComponentsLoading && allFavoriteComponents.length === 0 ? (
+        {allFavoriteComponents.length === 0 && !isFavoriteComponentsLoading  ?  (
           <NoFavoriteComponents />
         ) : (
           allFavoriteComponents.map((favoriteComponent, index) => (

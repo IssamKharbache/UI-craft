@@ -66,7 +66,7 @@ const AddProjectModal = ({ selectedIcon }: { selectedIcon: SelectedIcon }) => {
   }
   return (
     <div
-      className={`p-2 md:p-8 w-[80%] lg:w-[40%] border border-slate-50 bg-white rounded-md shadow-md  left-1/2 top-24 -translate-x-1/2 z-20 ${
+      className={`p-2 md:p-8 w-[80%] lg:w-[40%] border border-slate-50 bg-white rounded-md shadow-md  left-1/2 top-24 -translate-x-1/2 z-50 ${
         addModelOpen ? "absolute" : "hidden"
       }`}
     >

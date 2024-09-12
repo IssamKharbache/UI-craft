@@ -6,6 +6,7 @@ import { useAppContext } from "@/app/ContextApi";
 const Header = () => {
   const {
     projectsModal: { setOpenProjectsModal },
+    addProjectModelObject: { setAddModelOpen },
   } = useAppContext();
   return (
     <div className="flex justify-between">
@@ -15,7 +16,10 @@ const Header = () => {
         </div>
         <span className="font-bold text-md md:text-2xl  ">All Projects</span>
       </div>
-      <div className="flex items-center gap-2 justify-center bg-red-200 hover:bg-red-300/80 transition  rounded-full font-bold px-4 cursor-pointer">
+      <div
+        onClick={() => setAddModelOpen(true)}
+        className="flex items-center gap-2 justify-center bg-red-200 hover:bg-red-300/80 transition  rounded-full font-bold px-4 cursor-pointer"
+      >
         <AddIcon />
         <span className="hidden md:block">Add new project</span>
       </div>

@@ -272,18 +272,23 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({
         });
         setAllProjects(AllprojectsData);
         setIsLoading(false);
-      }, 3000);
+      }, 1000);
     }
     fetchAllProjects();
   }, []);
 
   //getting favorite components
   useEffect(() => {
+
     if (allProjects.length > 0) {
       const favoriteComponents = allProjects.flatMap((project) =>
         project.components.filter((component) => component.isFavorite)
       );
       setAllFavoriteComponents(favoriteComponents);
+      setIsFavoriteComponentsLoading(false);
+    }
+    if(allProjects.length === 0){
+      setAllFavoriteComponents([]);
       setIsFavoriteComponentsLoading(false);
     }
   }, [allProjects, selectedProject]);
