@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useAppContext } from "@/app/ContextApi";
 import { useWidth } from "@/utils/getDemensions";
 import { useEffect, useState } from "react";
@@ -11,6 +11,7 @@ const SideBarLinks = ({ isResp }: { isResp: boolean }) => {
   const width = useWidth();
   const [isActive, setIsActive] = useState(false);
   const path = usePathname();
+  const router = useRouter();
   const {
     menuItemsObject: { menuItems },
     sideBarOpen: { isOpen, setIsOpen },
@@ -24,6 +25,7 @@ const SideBarLinks = ({ isResp }: { isResp: boolean }) => {
   }
   const handleModalOpen = () => {
     setOpenProjectsModal(true);
+    router.push("/dashboard");
   };
   useEffect(() => {
     if (openProjectsModal) {
