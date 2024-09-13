@@ -24,6 +24,7 @@ const SideBarLinks = ({ isResp }: { isResp: boolean }) => {
     setIsOpen(true);
   }
   const handleModalOpen = () => {
+    setShowComponentPage(false);
     setOpenProjectsModal(true);
     router.push("/dashboard");
   };

@@ -7,7 +7,7 @@ import SortBy from './SortBy';
 import DragIndicatorIcon from '@mui/icons-material/DragIndicator';
 
 const ProjectsModal = () => {
-  const {projectsModal:{openProjectsModal,setOpenProjectsModal},addProjectModelObject:{addModelOpen}} = useAppContext();
+  const {projectsModal:{openProjectsModal},addProjectModelObject:{addModelOpen}} = useAppContext();
   if(addModelOpen){
     return(
       <SoftLayer />
@@ -34,8 +34,8 @@ export default ProjectsModal;
 
 import WarningIcon from '@mui/icons-material/Warning';
 const ProjectList = () => {
-  const {addProjectModelObject:{setAddModelOpen}} = useAppContext();
-  if(AllprojectsData.length === 0) return (
+  const {addProjectModelObject:{setAddModelOpen},allProjectsObject:{allProjects}} = useAppContext();
+  if(allProjects.length === 0) return (
     <div className='flex flex-col items-center justify-center gap-4  text-slate-400 text-sm mt-24'>
     <WarningIcon sx={{fontSize:50}} className='text-red-400' />
       <p>No Projects Found</p>
@@ -45,7 +45,7 @@ const ProjectList = () => {
   )
   return (
     <div className="w-full bg-slate-50 h-[64%] rounded-lg p-3 flex flex-col gap-3">
-      {AllprojectsData.map((project, index) => (
+      {allProjects.map((project, index) => (
       <SingleProject project={project} key={index} />
       ))}
      
@@ -57,15 +57,16 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { AllprojectsData, Project } from '@/localData';
 import { SoftLayer } from '../ContentArea';
+import { TextToIcon } from '@/utils/TextToIcon';
 const SingleProject = ({project}:{project:Project}) => {
   
   return (
     <div className="w-full bg-slate-100 rounded-md flex gap-3 items-center justify-between p-3">
       <div className="flex items-center gap-3 ">
        <DragIndicatorIcon className='text-slate-400' />
-       <div className="">
+       <div className="flex items-center justify-center">
         <div className="w-[30px] h-[30px] bg-red-200 rounded-full flex items-center justify-center">
-          <CategoryOutlined sx={{fontSize:17}} className='text-red-400 text-[17px]' />
+          {TextToIcon({text:project.icon,className:'text-red-400',fontSize:15})}
         </div>
        </div>
        {/* project name */}
