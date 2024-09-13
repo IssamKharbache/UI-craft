@@ -81,10 +81,12 @@ const AddProjectModal = ({ selectedIcon }: { selectedIcon: SelectedIcon }) => {
           {/* cateogry header */}
           <span className="font-semibold text-lg">New Project</span>
         </div>
-        <IoCloseOutline
-          onClick={() => setAddModelOpen(false)}
-          className="text-slate-700 text-[18px] cursor-pointer"
+       <div     onClick={() => setAddModelOpen(false)} className="bg-slate-200 hover:bg-slate-300/80 transition h-10 w-10 flex items-center justify-center rounded-full cursor-pointer">
+       <IoCloseOutline
+      
+          className="text-slate-700 text-[26px]"
         />
+       </div>
       </div>
       {/* body */}
       <div className="flex flex-col gap-2 mt-11 px-7 ">

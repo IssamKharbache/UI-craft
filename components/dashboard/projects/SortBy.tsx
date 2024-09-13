@@ -1,11 +1,12 @@
+import { useAppContext } from "@/app/ContextApi";
 import { KeyboardArrowDown } from "@mui/icons-material";
-import React from "react";
 
 const SortBy = () => {
+  const {allProjectsObject:{allProjects}} = useAppContext();
   return (
     <div className="flex justify-between mt-8">
       <p>
-        You have <span className="text-red-400 font-bold">3</span> projects
+        You have <span className="text-red-400 font-bold">{allProjects.length}</span> projects
       </p>
       <div className="flex gap-2 items-center">
         <span>Sort By :</span>
