@@ -146,8 +146,8 @@ const NoProjectsSearchedFound  = () => {
   return (
     <div className="flex flex-col items-center justify-center gap-4  text-slate-400 text-sm mt-24">
       <WarningIcon sx={{ fontSize: 50 }} className="text-red-400" />
-      <p>No Projects Found</p>
-      <p>Try searching for a project</p>
+      <p>Oops! That project seems to be missing</p>
+      <p>Try searching with a different keyword</p>
     </div>
   );
 };
